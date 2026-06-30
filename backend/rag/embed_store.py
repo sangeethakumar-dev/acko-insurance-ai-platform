@@ -4,15 +4,13 @@ from chunking import faq_chunking, policy_chunking
 from dotenv import load_dotenv
 import os
 from google import genai
+from backend.utils.config import GEMINI_API_KEY
 
 #Gemini Client
 
-load_dotenv()
-
-api_key = os.getenv("GEMINI_API_KEY")
         
 gemini_client = genai.Client(
-    api_key = api_key
+    api_key = GEMINI_API_KEY
 )
 
 #Choroma Client 
