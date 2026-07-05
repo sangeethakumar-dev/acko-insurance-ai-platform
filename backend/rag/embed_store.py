@@ -8,7 +8,6 @@ from backend.utils.config import GEMINI_API_KEY
 
 #Gemini Client
 
-        
 gemini_client = genai.Client(
     api_key = GEMINI_API_KEY
 )
