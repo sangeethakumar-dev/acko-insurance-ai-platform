@@ -1,0 +1,532 @@
+/* ===============================
+   RESET
+================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===============================
+   BODY
+================================== */
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #ffffff;
+    color: #111827;
+}
+
+/* ===============================
+   NAVBAR
+================================== */
+
+.navbar {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 20px 60px;
+
+    background:white;
+
+}
+
+.logo {
+
+    color:#6d28d9;
+
+    font-size: 28px;
+
+    font-weight: bold;
+
+}
+
+.nav-links {
+
+    display: flex;
+
+    list-style: none;
+
+    gap: 30px;
+
+}
+
+.nav-links a {
+
+    color:#222;
+
+    text-decoration: none;
+
+    font-weight: 500;
+
+}
+
+.login-btn {
+
+    background: #7c3aed;
+
+    color: white;
+
+    border: none;
+
+    padding: 10px 24px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+}
+
+.login-btn:hover {
+
+    background: #6d28d9;
+
+}
+
+/* ===============================
+   HERO
+================================== */
+
+.hero{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:80px 60px;
+
+    background:#f5efff;
+
+}
+
+.hero-left {
+
+    width: 50%;
+
+}
+
+.tag {
+
+    background: #ede9fe;
+
+    color: #6d28d9;
+
+    padding: 8px 16px;
+
+    border-radius: 20px;
+
+    display: inline-block;
+
+    margin-bottom: 20px;
+
+}
+
+.hero h1 {
+
+    font-size: 64px;
+
+    line-height: 1.2;
+
+    margin-bottom: 20px;
+
+}
+
+.hero span {
+
+    color: #7c3aed;
+
+}
+
+.hero p {
+
+    color: gray;
+
+    font-size: 18px;
+
+    margin-bottom: 30px;
+
+}
+
+.hero-buttons button {
+
+    padding: 14px 30px;
+
+    margin-right: 15px;
+
+    border-radius: 10px;
+
+    border: none;
+
+    cursor: pointer;
+
+    font-size: 16px;
+
+}
+
+.hero-buttons button:first-child {
+
+    background: #7c3aed;
+
+    color: white;
+
+}
+
+.hero-buttons button:last-child {
+
+    background: white;
+
+    border: 2px solid #7c3aed;
+
+    color: #7c3aed;
+
+}
+
+.hero-right {
+
+    width: 40%;
+
+    text-align: center;
+
+}
+
+.hero-right img {
+
+    width: 100%;
+
+    max-width: 450px;
+
+}
+
+/* ===============================
+   STATS
+================================== */
+
+.stats{
+
+    background:#2b165d;
+
+    display:flex;
+
+    justify-content:space-around;
+
+    align-items:center;
+
+    padding:35px 20px;
+
+}
+
+.stat-box{
+
+    text-align:center;
+
+    color:white;
+
+}
+
+.stat-box h2{
+
+    font-size:42px;
+
+    margin-bottom:10px;
+
+    font-weight:bold;
+
+}
+
+.stat-box p{
+
+    color:#ddd;
+
+    font-size:15px;
+
+}
+
+/* ===============================
+   PRODUCTS
+================================== */
+
+.products {
+
+    padding: 80px 60px;
+
+}
+
+.products h2 {
+
+    text-align: center;
+
+    margin-bottom: 40px;
+
+    font-size: 38px;
+
+}
+
+.product-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(4,1fr);
+
+    gap: 25px;
+
+}
+
+.product-card {
+
+    background: white;
+
+    border-radius: 15px;
+
+    padding: 40px;
+
+    text-align: center;
+
+    box-shadow: 0 8px 20px rgba(0,0,0,.08);
+
+    transition: .3s;
+
+}
+
+.product-card:hover {
+
+    transform: translateY(-8px);
+
+}
+
+.product-card h3 {
+
+    margin-top: 20px;
+
+}
+
+/* ===============================
+   FOOTER
+================================== */
+
+footer {
+
+    background: #111827;
+
+    color: white;
+
+    text-align: center;
+
+    padding: 30px;
+
+}
+
+/* =====================================
+   HERO RIGHT INSURANCE CARDS
+===================================== */
+
+.hero-right{
+
+    width:45%;
+
+}
+
+.insurance-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:25px;
+
+}
+
+.insurance-card{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:25px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+}
+
+.insurance-card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.insurance-card .icon{
+
+    font-size:40px;
+
+    margin-bottom:15px;
+
+}
+
+.insurance-card h3{
+
+    margin-bottom:10px;
+
+}
+
+.insurance-card p{
+
+    color:gray;
+
+    font-size:15px;
+
+    margin-bottom:15px;
+
+}
+
+.insurance-card span{
+
+    color:#7c3aed;
+
+    font-weight:bold;
+
+}
+
+
+/*======================================
+            BADGES
+======================================*/
+
+.badges{
+
+    display:flex;
+
+    justify-content:space-around;
+
+    align-items:center;
+
+    padding:30px 60px;
+
+    background:white;
+
+    border-bottom:1px solid #eee;
+
+}
+
+.badge{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+.badge h4{
+
+    font-size:17px;
+
+    margin-bottom:5px;
+
+}
+
+.badge p{
+
+    color:gray;
+
+    font-size:14px;
+
+}
+
+
+
+/*======================================
+            PRODUCTS
+======================================*/
+
+.products{
+
+    padding:80px 60px;
+
+    text-align:center;
+
+    background:#f8f9fc;
+
+}
+
+.products h2{
+
+    font-size:42px;
+
+    margin-bottom:15px;
+
+}
+
+.products>p{
+
+    color:gray;
+
+    margin-bottom:50px;
+
+}
+
+.product-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+
+    gap:30px;
+
+    margin-top:50px;
+
+}
+
+.product-card{
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+    min-height:260px;
+
+}
+
+.product-card:hover{
+
+    transform:translateY(-10px);
+
+}
+
+.product-card{
+
+    font-size:50px;
+
+}
+
+.product-card h3{
+
+    font-size:20px;
+
+    margin:20px 0 10px;
+
+}
+
+.product-card p{
+
+    color:#666;
+
+    font-size:17px;
+
+    line-height:1.6;
+
+}

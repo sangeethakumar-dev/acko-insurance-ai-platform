@@ -9,13 +9,24 @@ langchain-google-genai
 langchain-chroma
 langchain-text-splitters
 
+google-genai
+
 chromadb
 pypdf
 python-multipart
 requests
 streamlit
 
-regex
+scikit-learn
+pandas
+numpy
+scipy
 
 sqlalchemy
 psycopg2-binary
+
+joblib
+regex
+
+plotly
+matplotlib

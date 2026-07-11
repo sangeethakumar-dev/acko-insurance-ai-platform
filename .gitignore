@@ -3,3 +3,8 @@ __pycache__/
 *.pyc
 .env
 chroma_db/
+uploads/
+
+backend/ml/models/*.pkl
+backend/uploads/
+backend/reports/
