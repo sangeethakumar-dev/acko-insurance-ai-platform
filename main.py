@@ -1,4 +1,7 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+
 from backend.routes.chat_router import router as chat_router
 from backend.routes.quote_router import router as quote_router
 from backend.routes.claim_router import router as claim_router
@@ -15,6 +18,21 @@ from backend.routes.auth_router import router as auth_router
 app = FastAPI(
     title="ACKO Insurance AI Platform"  
 )
+
+app.add_middleware(
+
+    CORSMiddleware,
+
+    allow_origins=["*"],
+
+    allow_credentials=True,
+
+    allow_methods=["*"],
+
+    allow_headers=["*"]
+
+)
+
 
 app.include_router(chat_router)
 app.include_router(quote_router)

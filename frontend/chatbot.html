@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ACKO AI Assistant</title>
+
+    <link rel="stylesheet" href="css/chatbot.css">
+
+</head>
+
+<body>
+
+<!-- ==========================================
+HEADER
+========================================== -->
+
+<header class="navbar">
+
+    <div class="logo">
+        ACKO AI
+    </div>
+
+    <div class="nav-buttons">
+
+        <button id="homeBtn">
+            🏠 Home
+        </button>
+
+        <button id="clearBtn">
+            🗑 Clear Chat
+        </button>
+
+    </div>
+
+</header>
+
+<!-- ==========================================
+MAIN CONTAINER
+========================================== -->
+
+<div class="chat-layout">
+
+    <!-- ======================================
+    LEFT PANEL
+    ======================================= -->
+
+    <aside class="sidebar">
+
+        
+
+        <div class="menu-card"
+             id="policyCard">
+
+            <div class="menu-icon">
+                📋
+            </div>
+
+            <h3>Policy Q&A</h3>
+
+            <p>
+                Ask policy and coverage questions
+            </p>
+
+        </div>
+
+        <div class="menu-card"
+             id="claimCard">
+
+            <div class="menu-icon">
+                🚗
+            </div>
+
+            <h3>File a Claim</h3>
+
+            <p>
+                Report an accident or damage
+            </p>
+
+        </div>
+
+        <div class="menu-card"
+             id="quoteCard">
+
+            <div class="menu-icon">
+                💰
+            </div>
+
+            <h3>Get Quote</h3>
+
+            <p>
+                Bike & Car Premium
+            </p>
+
+        </div>
+
+        <div class="menu-card" id="healthCard">
+
+    <div class="menu-icon">
+        ❤️
+    </div>
+
+    <h3>Health Insurance</h3>
+
+    <p>
+        Health Premium Quote
+    </p>
+
+</div>
+
+    </aside>
+
+    <!-- ======================================
+    RIGHT CHAT AREA
+    ======================================= -->
+
+    <section class="chat-section">
+
+        <!-- CHAT HEADER -->
+
+        <div class="chat-header">
+
+            <div class="bot-avatar">
+                🤖
+            </div>
+
+            <div>
+
+                <h2>Hi! I'm ACKO AI</h2>
+
+                <p>
+                    Ask anything about your insurance.
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- CHAT WINDOW -->
+
+        <div id="chatMessages"
+             class="chat-messages">
+
+            <div class="bot-message">
+
+                <div class="message-avatar">
+
+                    🤖
+
+                </div>
+
+                <div class="message">
+
+                    Hello 👋<br><br>
+
+                    I can help you with:
+
+                    <br><br>
+
+                    • Insurance Policy Questions
+
+                    <br>
+
+                    • Claim Guidance
+
+                    <br>
+
+                    • Premium Quotes
+
+                    <br>
+
+                    • Health Insurance
+
+                    <br>
+
+                    • Existing Policy Information
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- INPUT AREA -->
+
+        <div class="chat-input">
+
+            <input
+
+                id="userInput"
+
+                type="text"
+
+                placeholder="Ask anything about your insurance..."
+
+            >
+
+            <button id="sendBtn">
+
+                ➤
+
+            </button>
+
+        </div>
+
+    </section>
+
+</div>
+
+<script src="js/api.js"></script>
+
+<script src="js/chatbot.js"></script>
+
+</body>
+
+</html>

@@ -145,3 +145,12 @@ CREATE TABLE IF NOT EXISTS admin_chat_logs (
 
 ALTER TABLE customers
 ADD COLUMN password VARCHAR(255);
+
+INSERT INTO admins
+(admin_name,email,password)
+VALUES
+(
+'Admin',
+'admin@acko.com',
+'admin123'
+);

@@ -8,6 +8,8 @@
     <title>ACKO Insurance AI Portal</title>
 
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
+    
 </head>
 
 <body>
@@ -34,7 +36,7 @@
 
         <div>
 
-            <button class="login-btn">
+            <button id="loginBtn" class="login-btn">
                 Login
             </button>
 
@@ -356,8 +358,186 @@
     </footer>
 
 
+<!-- ======================================
+SUCCESS POPUP
+====================================== -->
+
+<div id="successPopup" class="success-popup">
+
+    <div class="success-card">
+
+        <div class="success-icon">
+            ✅
+        </div>
+
+        <h2 id="successTitle">
+            Success
+        </h2>
+
+        <p id="successMessage">
+            Operation completed successfully.
+        </p>
+
+        <button id="successOkBtn">
+            Continue
+        </button>
+
+    </div>
+
+</div>
 
 <script src="js/api.js"></script>
+
+<!-- ==========================================
+LOGIN MODAL
+========================================== -->
+
+<div class="modal" id   ="loginModal">
+
+    <div class="modal-box">
+
+        <!-- HEADER -->
+
+        <div class="login-header">
+
+            <span class="close">&times;</span>
+
+            <h1>ACKO</h1>
+
+            <p>Sign in to your insurance portal</p>
+
+        </div>
+
+        <!-- CUSTOMER / ADMIN -->
+
+        <div class="login-type">
+
+            <button
+                class="type-btn active"
+                id="customerBtn"
+            >
+                Customer
+            </button>
+
+            <button
+                class="type-btn"
+                id="adminBtn"
+            >
+                ACKO Management
+            </button>
+
+        </div>
+
+        <!-- SIGN IN / REGISTER -->
+
+        <div class="login-option">
+
+            <button
+                class="option-btn active"
+                id="signinBtn"
+            >
+                Sign In
+            </button>
+
+            <button
+                class="option-btn"
+                id="registerBtn"
+            >
+                Register
+            </button>
+
+        </div>
+
+        <!-- LOGIN FORM -->
+
+        <form id="loginForm">
+
+    <input
+        type="email"
+        id="loginEmail"
+        placeholder="Email Address"
+        required
+    >
+
+    <div class="password-box">
+
+        <input
+            type="password"
+            id="loginPassword"
+            placeholder="Password"
+            required
+        >
+
+        <span id="togglePassword">
+            👁
+        </span>
+
+    </div>
+
+    <button
+        type="submit"
+        class="submit-btn"
+    >
+        Sign In
+    </button>
+
+</form>
+        <!-- REGISTER FORM -->
+
+        <form
+            id="registerForm"
+            style="display:none;"
+        >
+
+            <input
+                type="text"
+                id="customerName"
+                placeholder="Full Name"
+            >
+
+            <input
+                type="text"
+                id="phone"
+                placeholder="Phone Number"
+            >
+
+            <input
+                type="email"
+                id="registerEmail"
+                placeholder="Email Address"
+            >
+
+            <input
+                type="password"
+                id="registerPassword"
+                placeholder="Password"
+            >
+
+            <textarea
+                id="address"
+                placeholder="Address"
+            ></textarea>
+
+            <button
+                type="submit"
+                class="submit-btn"
+            >
+                Create Account
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="css/login.css">
+
+<script src="js/login.js"></script>
+
+</div>
+
+</div>
 
 </body>
 

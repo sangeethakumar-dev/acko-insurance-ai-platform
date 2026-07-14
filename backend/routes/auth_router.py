@@ -61,7 +61,6 @@ def register_customer(request: RegisterRequest):
             detail=str(e)
         )
 
-
 # ==========================================
 # CUSTOMER LOGIN
 # ==========================================
@@ -89,7 +88,6 @@ def customer_login(request: LoginRequest):
             status_code=500,
             detail=str(e)
         )
-
 
 # ==========================================
 # ADMIN LOGIN

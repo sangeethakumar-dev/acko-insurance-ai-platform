@@ -1,0 +1,664 @@
+/* ==========================================
+GENERAL
+========================================== */
+
+*{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+    font-family:Segoe UI, sans-serif;
+
+}
+
+body{
+
+    background:#f6f7fc;
+
+    color:#222;
+
+}
+
+/* ==========================================
+NAVBAR
+========================================== */
+
+.navbar{
+
+    height:75px;
+
+    background:white;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:0 70px;
+
+    box-shadow:0 4px 18px rgba(0,0,0,.06);
+
+    position:sticky;
+
+    top:0;
+
+    z-index:100;
+
+}
+
+.logo{
+
+    font-size:34px;
+
+    font-weight:800;
+
+    color:#6236ff;
+
+}
+
+.nav-links{
+
+    display:flex;
+
+    gap:35px;
+
+    list-style:none;
+
+}
+
+.nav-links a{
+
+    text-decoration:none;
+
+    color:#444;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.nav-links a:hover{
+
+    color:#6236ff;
+
+}
+
+
+
+.logout-btn{
+    background: linear-gradient(135deg,#5B2EFF,#7A4DFF);
+    color:white;
+    border:none;
+    padding:14px 34px;
+    border-radius:16px;
+    font-size:18px;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+    box-shadow:0 10px 25px rgba(91,46,255,.25);
+}
+
+.logoutbtn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 15px 35px rgba(91,46,255,.35);
+}
+
+
+/* ==========================================
+HERO
+========================================== */
+
+.hero{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:70px;
+
+    gap:60px;
+
+}
+
+.hero-left{
+
+    width:50%;
+
+}
+
+.welcome-tag{
+
+    display:inline-block;
+
+    background:#efe9ff;
+
+    color:#6236ff;
+
+    padding:10px 18px;
+
+    border-radius:30px;
+
+    font-weight:600;
+
+    margin-bottom:20px;
+
+}
+
+.hero h1{
+
+    font-size:58px;
+
+    line-height:1.1;
+
+    margin-bottom:20px;
+
+}
+
+.hero p{
+
+    color:#666;
+
+    font-size:20px;
+
+    line-height:1.6;
+
+    margin-bottom:30px;
+
+}
+
+.primary-btn{
+
+    border:none;
+
+    background:linear-gradient(135deg,#5a2fe2,#7b4cff);
+
+    color:white;
+
+    padding:15px 35px;
+
+    border-radius:14px;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+}
+
+
+/* ==========================================
+PREMIUM STAT CARDS
+========================================== */
+
+.hero-right{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:25px;
+
+}
+
+.stat-card{
+
+    background:white;
+
+    border-radius:22px;
+
+    padding:35px 25px;
+
+    text-align:center;
+
+    box-shadow:0 12px 35px rgba(0,0,0,.08);
+
+    transition:.35s;
+
+    cursor:pointer;
+
+}
+
+.stat-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 18px 45px rgba(98,54,255,.18);
+
+}
+
+.stat-icon{
+
+    font-size:42px;
+
+    margin-bottom:18px;
+
+}
+
+.stat-card h2{
+
+    color:#6236ff;
+
+    font-size:38px;
+
+    margin-bottom:10px;
+
+}
+
+.stat-card p{
+
+    color:#666;
+
+    font-size:16px;
+
+}
+
+
+/* ==========================================
+RIGHT SIDE
+========================================== */
+
+.hero-right{
+
+    width:45%;
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:25px;
+
+}
+
+.hero-right img{
+
+    width:100%;
+
+}
+
+/* ==========================================
+SERVICE CARDS
+========================================== */
+
+.services{
+
+    padding:0 70px 70px;
+
+}
+
+.services h2{
+
+    font-size:34px;
+
+    margin-bottom:35px;
+
+}
+
+.service-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:28px;
+
+}
+
+.service-card{
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    box-shadow:0 12px 35px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+    cursor:pointer;
+
+}
+
+.service-card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.icon{
+
+    font-size:42px;
+
+    margin-bottom:18px;
+
+}
+
+.service-card h3{
+
+    margin-bottom:15px;
+
+}
+
+.service-card p{
+
+    color:#666;
+
+    line-height:1.5;
+
+}
+
+/* ==========================================
+TABLE
+========================================== */
+
+.activity{
+
+    padding:0 70px 90px;
+
+}
+
+.activity h2{
+
+    margin-bottom:25px;
+
+    font-size:34px;
+
+}
+
+table{
+
+    width:100%;
+
+    background:white;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    border-collapse:collapse;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
+
+}
+
+th{
+
+    background:#6236ff;
+
+    color:white;
+
+    padding:18px;
+
+}
+
+td{
+
+    padding:18px;
+
+    border-bottom:1px solid #eee;
+
+}
+
+.completed{
+
+    color:#11a34b;
+
+    font-weight:700;
+
+}
+
+.pending{
+
+    color:#f39c12;
+
+    font-weight:700;
+
+}
+
+/* ==========================================
+AI BUTTON
+========================================== */
+
+.ai-button{
+
+    position:fixed;
+
+    right:35px;
+
+    bottom:35px;
+
+    border:none;
+
+    background:linear-gradient(135deg,#5b2ce3,#7d4dff);
+
+    color:white;
+
+    padding:18px 30px;
+
+    border-radius:50px;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    box-shadow:0 12px 28px rgba(98,54,255,.35);
+
+    transition:.3s;
+
+}
+
+.ai-button:hover{
+
+    transform:scale(1.05);
+
+}
+
+/* ==========================================
+FOOTER
+========================================== */
+
+footer{
+
+    background:#35196e;
+
+    color:white;
+
+    text-align:center;
+
+    padding:25px;
+
+}
+
+/* ==========================================
+RESPONSIVE
+========================================== */
+
+@media(max-width:1000px){
+
+.hero{
+
+flex-direction:column;
+
+}
+
+.hero-left,
+
+.hero-right{
+
+width:100%;
+
+}
+
+.service-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:700px){
+
+.navbar{
+
+padding:20px;
+
+flex-direction:column;
+
+height:auto;
+
+gap:20px;
+
+}
+
+.nav-links{
+
+flex-wrap:wrap;
+
+justify-content:center;
+
+}
+
+.service-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.hero{
+
+padding:40px 25px;
+
+}
+
+
+
+.services,
+
+.activity{
+
+padding:30px;
+
+}
+
+.hero h1{
+
+font-size:42px;
+
+}
+
+}
+
+/* ==========================================
+FLOATING AI ASSISTANT
+========================================== */
+
+.ai-widget{
+
+    position:fixed;
+
+    right:30px;
+
+    bottom:30px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:15px 22px;
+
+    border-radius:60px;
+
+    background:linear-gradient(135deg,#5b2ce3,#7d4dff);
+
+    color:white;
+
+    cursor:pointer;
+
+    box-shadow:0 15px 40px rgba(98,54,255,.35);
+
+    transition:.3s;
+
+    z-index:999;
+
+}
+
+.ai-widget:hover{
+
+    transform:translateY(-6px);
+
+}
+
+.ai-icon{
+
+    width:55px;
+
+    height:55px;
+
+    border-radius:50%;
+
+    background:white;
+
+    color:#6236ff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:28px;
+
+    animation:floatAI 2s infinite ease-in-out;
+
+}
+
+.ai-widget h4{
+
+    margin:0;
+
+    font-size:18px;
+
+}
+
+.ai-widget span{
+
+    font-size:13px;
+
+    opacity:.9;
+
+}
+
+@keyframes floatAI{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-6px);
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+    }
+
+}
