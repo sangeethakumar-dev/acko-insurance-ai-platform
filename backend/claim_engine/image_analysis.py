@@ -29,26 +29,31 @@ def analyze_images(image_paths: list[str]) -> dict:
     # Prepare Gemini input
     contents = [prompt]
 
-    for image_path in image_paths:
+    image_path = Path(image_paths[0])
 
-        image_path = Path(image_path)
+    with open(image_path, "rb") as image_file:
 
-        with open(image_path, "rb") as image_file:
-
-            image_bytes = image_file.read()
+        image_bytes = image_file.read()
 
         
 
-        contents.append(
-        types.Part.from_bytes(
-        data=image_bytes,
-        mime_type="image/jpeg"
-    )
-)
+    suffix = image_path.suffix.lower()
+
+    if suffix == ".png":
+        mime = "image/png"
+    else:
+        mime = "image/jpeg"
+
+    contents.append(
+            types.Part.from_bytes(
+            data=image_bytes,
+            mime_type=mime
+            )
+        )
 
     # Gemini Vision
     response = gemini_client.models.generate_content(
-        model="gemini-2.5-flash",
+        model="gemini-2.5-pro",
         contents=contents,
     )
 

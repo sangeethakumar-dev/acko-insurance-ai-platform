@@ -9,7 +9,7 @@ router = APIRouter()
 @router.post("/claim/analyze")
 async def analyze_claim(
 
-    image: UploadFile = File(...),
+    images: List[UploadFile] = File(...),
 
     customer_name: str = Form(...),
 
@@ -18,6 +18,10 @@ async def analyze_claim(
     policy_age: str = Form(...),
 
     annual_premium: float = Form(...),
+
+    vehicle_age: int = Form(...),
+
+    idv: float = Form(...),
 
     previous_claims: str = Form(...),
 
@@ -44,6 +48,10 @@ async def analyze_claim(
 
         "annual_premium": annual_premium,
 
+        "vehicle_age": vehicle_age,
+
+        "idv": idv,
+
         "previous_claims": previous_claims,
 
         "ncb": ncb,
@@ -60,4 +68,4 @@ async def analyze_claim(
 
     }
 
-    return await process_claim(image, customer_details)
+    return await process_claim(images, customer_details)

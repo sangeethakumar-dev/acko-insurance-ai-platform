@@ -35,64 +35,82 @@ def build_prompt(user_query, top_3_chunks):
     return prompt
 
 
-def build_quote_prompt(insurance_type, details: dict, predicted_premium: float):
+def build_quote_prompt(
+    insurance_type,
+    details: dict,
+    predicted_premium: float
+):
 
-    prompt = f"""
-You are ACKO Insurance AI Assistant.
+    return f"""
+You are an ACKO Insurance AI Advisor.
 
-The user requested an insurance quotation.
+The machine learning model has already predicted the annual premium.
 
-Customer Details:
+DO NOT change the premium amount.
 
-Customer Age: {details['customer_age']}
-City: {details['city']}
-State: {details['state']}
-Vehicle Make: {details['vehicle_make']}
-Vehicle Model: {details['vehicle_model']}
-Variant: {details['variant']}
-Fuel Type: {details['fuel_type']}
-Manufacturing Year: {details['manufacturing_year']}
-Engine CC: {details['engine_cc']}
-Vehicle Age: {details['vehicle_age_years']} years
-IDV: ₹{details['idv']}
-NCB: {details['ncb_percent']}%
-Previous Claims: {details['claim_history_count']}
-Policy Type: {details['policy_type']}
-Usage Type: {details['usage_type']}
-Number of Add-ons: {details['num_addons']}
-
-Machine Learning Estimated Annual Premium
-
+Predicted Annual Premium:
 ₹{predicted_premium:,.2f}
 
-Now explain this quotation to the customer.
+Vehicle Details
 
-Include:
+Vehicle Make : {details['vehicle_make']}
+Vehicle Model : {details['vehicle_model']}
+Variant : {details['variant']}
+Fuel Type : {details['fuel_type']}
+Manufacturing Year : {details['manufacturing_year']}
+Vehicle Age : {details['vehicle_age_years']}
+Engine CC : {details['engine_cc']}
+IDV : ₹{details['idv']}
 
-• Estimated Annual Premium
-• Monthly equivalent premium
-• Why this premium is estimated
-• How IDV affects premium
-• How NCB affects premium
-• Mention claim history impact
-• Mention this is an AI estimation
-• End politely
+Policy Details
 
-Keep the response under 150 words.
+Policy Type : {details['policy_type']}
+NCB : {details['ncb_percent']}%
+Previous Claims : {details['claim_history_count']}
+Add-ons : {details['num_addons']}
 
-Explain:
+Customer Details
 
-1. Estimated premium
-2. Why this premium was predicted
-3. Factors increasing premium
-4. Factors reducing premium
-5. Suggest ways to reduce premium in future
+Age : {details['customer_age']}
+City : {details['city']}
+State : {details['state']}
 
-Keep it friendly.
-Do not invent numbers.
+Write ONLY HTML.
+
+Do NOT use Markdown.
+
+Do NOT use ** or #.
+
+Do NOT use triple backticks.
+
+Keep the response below 170 words.
+
+Use this structure exactly:
+
+<h3>Understanding Your Quote</h3>
+
+<ul>
+
+<li><b>Premium Factors:</b> Explain why the premium has this value.</li>
+
+<li><b>NCB Impact:</b> Explain how NCB affects premium.</li>
+
+<li><b>Claim History:</b> Explain previous claims effect.</li>
+
+<li><b>IDV:</b> Explain how IDV affects premium.</li>
+
+<li><b>Policy Coverage:</b> Mention the selected policy type.</li>
+
+<li><b>Ways to Reduce Premium:</b> Give 3 short tips.</li>
+
+</ul>
+
+End with one short recommendation.
+
+Never change the predicted premium.
 """
 
-    return prompt
+
 
 def build_claim_analysis_prompt() -> str:
     """
@@ -138,260 +156,33 @@ Rules:
 - Return ONLY JSON.
 """
 
+def build_claim_report_prompt(claim_data):
 
-def build_claim_report_prompt(claim_data: Dict[str, Any]) -> str:
     return f"""
-You are a Senior Motor Insurance Claims Surveyor working for a leading insurance company.
+You are an insurance claim assessor.
 
-Your responsibility is to prepare a professional claim assessment report after reviewing:
-
-• Vehicle information
-• AI image damage analysis
-• Policy details
-• Fraud analysis
-• Claim calculation
-
-Below is the complete claim information.
+Using the following claim details:
 
 {claim_data}
 
+Generate a short professional claim summary.
 
-===========================
-REPORT REQUIREMENTS
-===========================
+Include:
 
-Generate a professional insurance report.
+1. Claim Status (Approved / Rejected)
+2. Vehicle Details
+3. Damage Summary
+4. Estimated Repair Cost
+5. Recommended Claim Amount
+6. Fraud Risk
+7. Key Remarks
+8. Next Step for Customer
 
-Use clear headings.
+Use simple professional language.
 
-Do NOT use markdown.
+Do not use markdown.
 
-Write in a formal insurance company style.
-
-The report must contain ALL of the following sections.
-
-
-==================================================
-CLAIM ASSESSMENT REPORT
-==================================================
-
-Claim Number:
-Claim Date:
-Assessment Status:
-
---------------------------------------------------
-
-1. EXECUTIVE SUMMARY
-
-Summarize
-
-• vehicle involved
-
-• type of accident
-
-• damage severity
-
-• overall recommendation
-
-Write 1-2 professional paragraphs.
-
-
---------------------------------------------------
-
-2. VEHICLE INFORMATION
-
-Include
-
-Vehicle Type
-
-Brand
-
-Model
-
-Segment
-
-Color
-
-Insurance Declared Value (IDV)
-
-Policy Type
-
-
---------------------------------------------------
-
-3. DAMAGE ASSESSMENT
-
-Describe
-
-Damage Type
-
-Severity Score (1-10)
-
-Affected Parts
-
-Estimated Repair Cost
-
-Explain how the damage appears from the uploaded images.
-
-
---------------------------------------------------
-
-4. COVERAGE ANALYSIS
-
-Explain
-
-Is the damage covered?
-
-Why?
-
-Mention
-
-Policy Type
-
-Zero Depreciation
-
-Engine Protection
-
-Previous Claims
-
-No Claim Bonus
-
-Explain how each affects the claim.
-
-
---------------------------------------------------
-
-5. FRAUD ASSESSMENT
-
-Mention
-
-Fraud Risk
-
-Fraud Score
-
-Detected Flags
-
-Explain why the claim appears
-
-LOW
-
-MEDIUM
-
-or
-
-HIGH
-
-risk.
-
-
---------------------------------------------------
-
-6. REPAIR COST BREAKDOWN
-
-Display the following as a table.
-
-Description                     Amount (INR)
-
-Parts Replacement
-
-Labour & Refinishing
-
-GST
-
-Miscellaneous / Contingency
-
-Depreciation
-
-Previous Claim Deduction
-
-NCB Adjustment
-
-Fraud Deduction
-
---------------------------------------------------
-
-Gross Claim Amount
-
-Recommended Payout
-
-
---------------------------------------------------
-
-7. CLAIM DECISION
-
-Clearly state
-
-APPROVED
-
-or
-
-REJECTED
-
-If manual inspection is required,
-
-mention it.
-
-
---------------------------------------------------
-
-8. RECOMMENDATIONS
-
-Provide professional recommendations for
-
-repair
-
-inspection
-
-customer
-
-insurance company
-
-
---------------------------------------------------
-
-9. NEXT STEPS
-
-Explain what the customer should do next.
-
-Example
-
-• Visit network garage
-
-• Carry policy documents
-
-• Submit ID proof
-
-• Wait for approval
-
-• Download report
-
-
---------------------------------------------------
-
-10. DISCLAIMER
-
-Mention that
-
-"This assessment is AI-assisted and subject to final approval by the insurance company's surveyor."
-
-
-==================================================
-WRITING STYLE
-==================================================
-
-Write professionally.
-
-Avoid bullet overload.
-
-Sound like an official insurance company report.
-
-Return ONLY the report.
-
-Do not return JSON.
-
-Do not return Markdown.
-
-Do not explain your reasoning.
+Return only the report.
 """
 
 def build_manager_prompt(question: str, context: str) -> str:

@@ -1,0 +1,395 @@
+<div class="bot-message">
+
+    <div class="avatar">🤖</div>
+
+    <div class="message">
+
+        <form id="carQuoteForm">
+
+            <h2>🚗 Car Quotation Form</h2>
+
+            <p class="form-subtitle">
+                Fill the vehicle details below to predict your premium.
+            </p>
+
+            <!-- ================= VEHICLE DETAILS ================= -->
+
+            <div class="form-section">
+
+                <h3>🚗 Vehicle Details</h3>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label>Vehicle Make</label>
+
+                        <select
+                            id="vehicle_make"
+                            name="vehicle_make"
+                            required>
+
+                            <option value="" selected disabled>
+                                Select Vehicle Make
+                            </option>
+
+                            <option>Hyundai</option>
+                            <option>Maruti Suzuki</option>
+                            <option>Tata</option>
+                            <option>Mahindra</option>
+                            <option>Honda</option>
+                            <option>Toyota</option>
+                            <option>Kia</option>
+                            <option>MG</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Vehicle Model</label>
+
+                        <select
+                            id="vehicle_model"
+                            name="vehicle_model"
+                            required>
+
+                            <option value="" selected disabled>
+                                Select Vehicle Model
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Variant</label>
+
+                        <select
+                            id="variant"
+                            name="variant"
+                            required>
+
+                            <option value="" selected disabled>
+                                Select Variant
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Segment</label>
+
+                        <select
+                            name="segment"
+                            required>
+
+                            <option value="" selected disabled>
+                                Select Segment
+                            </option>
+
+                            <option>Hatchback</option>
+                            <option>Sedan</option>
+                            <option>SUV</option>
+                            <option>MUV</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Fuel Type</label>
+
+                        <select
+                            name="fuel_type"
+                            required>
+
+                            <option value="" selected disabled>
+                                Select Fuel Type
+                            </option>
+
+                            <option>Petrol</option>
+                            <option>Diesel</option>
+                            <option>CNG</option>
+                            <option>Electric</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Colour</label>
+
+                        <select
+                            name="colour"
+                            required>
+
+                            <option value="" selected disabled>
+                                Select Colour
+                            </option>
+
+                            <option>White</option>
+                            <option>Black</option>
+                            <option>Silver</option>
+                            <option>Grey</option>
+                            <option>Blue</option>
+                            <option>Red</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Manufacturing Year</label>
+
+                        <input
+                            type="number"
+                            name="manufacturing_year"
+                            placeholder="2022"
+                            min="2000"
+                            max="2030"
+                            required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Vehicle Age (Years)</label>
+
+                        <input
+                            type="number"
+                            name="vehicle_age_years"
+                            placeholder="3"
+                            required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Engine CC</label>
+
+                        <input
+                            type="number"
+                            name="engine_cc"
+                            placeholder="1197"
+                            required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>IDV (₹)</label>
+
+                        <input
+                            type="number"
+                            name="idv"
+                            placeholder="650000"
+                            required>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+                        <!-- ================= POLICY DETAILS ================= -->
+
+            <div class="form-section">
+
+                <h3>📋 Policy Details</h3>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label>Policy Type</label>
+
+                        <select
+                            name="policy_type"
+                            required>
+
+                            <option value="" selected disabled>
+                                Select Policy Type
+                            </option>
+
+                            <option>Comprehensive</option>
+                            <option>Third Party</option>
+                            <option>Own Damage</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Previous Insurer</label>
+
+                        <select
+                            name="previous_insurer"
+                            required>
+
+                            <option value="" selected disabled>
+                                Select Previous Insurer
+                            </option>
+
+                            <option>ACKO</option>
+                            <option>HDFC ERGO</option>
+                            <option>ICICI Lombard</option>
+                            <option>Bajaj Allianz</option>
+                            <option>Reliance</option>
+                            <option>TATA AIG</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>NCB Percentage</label>
+
+                        <input
+                            type="number"
+                            name="ncb_percent"
+                            placeholder="20"
+                            required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Previous Claims</label>
+
+                        <input
+                            type="number"
+                            name="claim_history_count"
+                            placeholder="0"
+                            required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Number of Add-ons</label>
+
+                        <input
+                            type="number"
+                            name="num_addons"
+                            placeholder="2"
+                            required>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ================= CUSTOMER DETAILS ================= -->
+
+            <div class="form-section">
+
+                <h3>👤 Customer Details</h3>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label>Customer Age</label>
+
+                        <input
+                            type="number"
+                            name="customer_age"
+                            placeholder="30"
+                            required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>City</label>
+
+                        <input
+                            type="text"
+                            name="city"
+                            placeholder="Chennai"
+                            required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>State</label>
+
+                        <select
+                            name="state"
+                            required>
+
+                            <option value="" selected disabled>
+                                Select State
+                            </option>
+
+                            <option>Tamil Nadu</option>
+                            <option>Kerala</option>
+                            <option>Karnataka</option>
+                            <option>Telangana</option>
+                            <option>Maharashtra</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>City Tier</label>
+
+                        <select
+                            name="city_tier"
+                            required>
+
+                            <option value="" selected disabled>
+                                Select City Tier
+                            </option>
+
+                            <option value="1">Tier 1</option>
+                            <option value="2">Tier 2</option>
+                            <option value="3">Tier 3</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>City Risk Score</label>
+
+                        <input
+                            type="number"
+                            name="city_risk_score"
+                            placeholder="65"
+                            required>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button
+                type="submit"
+                class="premium-btn">
+
+                🚀 Predict Premium
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>

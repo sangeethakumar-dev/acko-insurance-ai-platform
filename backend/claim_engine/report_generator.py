@@ -177,7 +177,7 @@ def generate_claim_report(
 
     response = gemini_client.models.generate_content(
 
-        model="gemini-2.5-flash",
+        model="gemini-2.5-pro",
 
         contents=prompt
 

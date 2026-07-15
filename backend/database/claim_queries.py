@@ -29,11 +29,7 @@ def save_claim(
 
     claim_result: dict,
 
-    pdf_path: str,
-
-    image_paths: list,
-
-    report: str
+    image_paths: list
 
 ):
     conn = get_connection()
@@ -62,15 +58,13 @@ def save_claim(
 
         fraud_risk,
 
-        recommended_payout,
-
-        pdf_path
+        recommended_payout
 
     )
 
     VALUES
 
-    (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+    (%s,%s,%s,%s,%s,%s,%s,%s,%s)
 
     RETURNING claim_id;
     """
@@ -97,9 +91,7 @@ def save_claim(
 
             fraud_result.get("fraud_risk"),
 
-            claim_result.get("recommended_payout"),
-
-            pdf_path
+            claim_result.get("recommended_payout")
 
         )
 
@@ -135,37 +127,6 @@ VALUES
 
     )
 
-
-# Save AI Report
-
-    report_query = """
-INSERT INTO claim_reports
-(
-
-    claim_id,
-
-    report
-
-)
-
-VALUES
-
-    (%s,%s);
-"""
-
-    cur.execute(
-
-        report_query,
-
-    (
-
-        claim_id,
-
-        report
-
-    )
-
-)
 
     conn.commit()
 
@@ -228,16 +189,6 @@ def save_claim_images(
     cur.close()
 
     conn.close()
-
-
-# Save AI Report
-def save_claim_report(
-
-    claim_id,
-
-    report
-
-):
 
     conn = get_connection()
 
@@ -553,45 +504,6 @@ def get_claim_images(claim_id):
         dict(zip(columns, row))
         for row in cursor.fetchall()
     ]
-
-    cursor.close()
-    conn.close()
-
-    return result
-
-# GET AI ANALYSIS
-
-def get_claim_analysis(claim_id):
-
-    conn = get_connection()
-    cursor = conn.cursor()
-
-    cursor.execute("""
-
-        SELECT
-
-            report
-
-        FROM claim_reports
-
-        WHERE claim_id=%s;
-
-    """, (claim_id,))
-
-    row = cursor.fetchone()
-
-    if row is None:
-
-        cursor.close()
-        conn.close()
-
-        return None
-
-    result = {
-
-        "report": row[0]
-
-    }
 
     cursor.close()
     conn.close()

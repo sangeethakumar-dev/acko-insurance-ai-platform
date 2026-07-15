@@ -70,73 +70,10 @@ function showPolicyChat(){
         "👋 Ask me anything about your insurance policy, coverage, exclusions, renewal, premium or claims."
     );
 
-
-function showClaimForm(){
-
-    chatMessages.innerHTML += `
-
-    <div class="bot-message">
-
-        <div class="avatar">🤖</div>
-
-        <div class="message">
-
-        <h3>🚗 File Insurance Claim</h3>
-
-        <form id="claimForm">
-
-            <input type="text" id="customerName" placeholder="Customer Name" required>
-
-            <select id="policyType">
-                <option>Bike</option>
-                <option>Car</option>
-            </select>
-
-            <input type="text" id="policyAge" placeholder="Policy Age">
-
-            <input type="number" id="annualPremium" placeholder="Annual Premium">
-
-            <input type="text" id="previousClaims" placeholder="Previous Claims">
-
-            <input type="text" id="ncb" placeholder="NCB">
-
-            <input type="text" id="zeroDep" placeholder="Zero Dep">
-
-            <input type="text" id="engineProtection" placeholder="Engine Protection">
-
-            <input type="text" id="state" placeholder="State">
-
-            <input type="text" id="ageGroup" placeholder="Age Group">
-
-            <input type="text" id="cityTier" placeholder="City Tier">
-
-            <label><b>Upload Damage Images</b></label>
-
-            <input
-                type="file"
-                id="claimImages"
-                accept="image/*"
-                multiple
-            >
-
-            <button type="submit">
-                Submit Claim
-            </button>
-
-        </form>
-
-        </div>
-
-    </div>
-
-    `;
-
-    chatMessages.scrollTop =
-    chatMessages.scrollHeight;
-
 }
 
-}
+///////////////////////////////////////////////////////////
+
 
 function showQuoteSelection(){
 
@@ -183,150 +120,1296 @@ function showQuoteSelection(){
 
 }
 
-function showBikeQuoteForm(){
+async function showBikeQuoteForm(){
 
-chatMessages.innerHTML += `
+    const response = await fetch("forms/bikeQuoteForm.html");
 
-<div class="bot-message">
+    const html = await response.text();
 
-<div class="avatar">🤖</div>
+    chatMessages.insertAdjacentHTML("beforeend", html);
 
-<div class="message">
+    chatMessages.scrollTop =
+        chatMessages.scrollHeight;
 
-<h3>🏍 Bike Insurance Quote</h3>
+    document
+        .getElementById("bikeQuoteForm")
+        .addEventListener(
+            "submit",
+            submitBikeQuote
+        );
 
-<form id="bikeQuoteForm">
+    const bikeData = {
 
-<input type="number" placeholder="Vehicle Age">
+Honda:{
+models:["Activa 6G","Shine","SP125","Hornet 2.0"]
+},
 
-<input type="number" placeholder="Engine CC">
+TVS:{
+models:["Apache RTR 160","Apache RTR 200","Jupiter","NTorq"]
+},
 
-<input type="text" placeholder="Brand">
+Hero:{
+models:["Splendor Plus","Xtreme 160R","Pleasure+"]
+},
 
-<input type="text" placeholder="Fuel Type">
+Bajaj:{
+models:["Pulsar N160","Pulsar NS200","CT110"]
+},
 
-<input type="number" placeholder="Previous Claims">
+Yamaha:{
+models:["FZ-X","R15 V4","RayZR"]
+},
 
-<button>
+"Royal Enfield":{
+models:["Classic 350","Hunter 350","Meteor 350"]
+}
 
-Predict Premium
+};
 
-</button>
+const make=document.getElementById("vehicle_make");
+const model=document.getElementById("vehicle_model");
 
-</form>
+console.log(make);
+console.log(model);
 
-</div>
+make.onchange=function(){
 
-</div>
-
+model.innerHTML = `
+<option value="" selected disabled>
+    Select Vehicle Model
+</option>
 `;
 
-chatMessages.scrollTop=
-chatMessages.scrollHeight;
+if(!bikeData[this.value]) return;
+
+bikeData[this.value].models.forEach(m=>{
+
+model.innerHTML += `<option>${m}</option>`;
+
+});
+
+model.value = "";
+
+};
+
+make.value = "";
+
+    const variant=document.getElementById("variant");
+
+    console.log(variant);
+
+    const variants={
+
+"Activa 6G":[
+"Standard",
+"Deluxe",
+"H-Smart"
+],
+
+"Shine":[
+"Drum",
+"Disc"
+],
+
+"SP125":[
+"Drum",
+"Disc"
+],
+
+"Hornet 2.0":[
+"Standard",
+"Repsol Edition"
+],
+
+"Apache RTR 160":[
+"Single Disc",
+"Dual Disc"
+],
+
+"Apache RTR 200":[
+"Race Edition",
+"Dual ABS"
+],
+
+"Jupiter":[
+"ZX",
+"Classic"
+],
+
+"NTorq":[
+"Race XP",
+"Super Squad"
+],
+
+"Splendor Plus":[
+"Self",
+"Xtec"
+],
+
+"Xtreme 160R":[
+"Standard",
+"Connected"
+],
+
+"Pleasure+":[
+"LX",
+"VX"
+],
+
+"Pulsar N160":[
+"Single ABS",
+"Dual ABS"
+],
+
+"Pulsar NS200":[
+"Standard",
+"Bluetooth Edition"
+],
+
+"CT110":[
+"Kick",
+"Electric Start"
+],
+
+"FZ-X":[
+"Standard",
+"Chrome"
+],
+
+"R15 V4":[
+"Metallic",
+"MotoGP Edition"
+],
+
+"RayZR":[
+"Street Rally",
+"Disc"
+],
+
+"Classic 350":[
+"Redditch",
+"Halcyon",
+"Signals"
+],
+
+"Hunter 350":[
+"Retro",
+"Metro"
+],
+
+"Meteor 350":[
+"Fireball",
+"Stellar",
+"Supernova"
+]
+
+};
+
+model.onchange=function(){
+
+variant.innerHTML = `
+<option value="" selected disabled>
+    Select Variant
+</option>
+`;
+
+if(!variants[this.value]) return;
+
+variants[this.value].forEach(v=>{
+
+variant.innerHTML += `<option>${v}</option>`;
+
+});
+
+};
+
+model.dispatchEvent(new Event("change"));
 
 }
 
-function showCarQuoteForm(){
 
-chatMessages.innerHTML += `
+async function submitBikeQuote(e){
 
-<div class="bot-message">
+    e.preventDefault();
 
-<div class="avatar">🤖</div>
+    const form = document.getElementById("bikeQuoteForm");
 
-<div class="message">
+    showLoading();
 
-<h3>🚘 Car Insurance Quote</h3>
+    const payload = {
 
-<form id="carQuoteForm">
+        insurance_type: "bike",
 
-<input type="number" placeholder="Vehicle Age">
+        details: {
 
-<input type="text" placeholder="Brand">
+            customer_age: Number(form.elements["customer_age"].value),
 
-<input type="text" placeholder="Fuel Type">
+            city: form.elements["city"].value,
 
-<input type="number" placeholder="Engine Capacity">
+            state: form.elements["state"].value,
 
-<input type="number" placeholder="Previous Claims">
+            city_tier: Number(form.elements["city_tier"].value),
 
-<button>
+            city_risk_score: Number(form.elements["city_risk_score"].value),
 
-Predict Premium
+            vehicle_make: form.elements["vehicle_make"].value,
 
-</button>
+            vehicle_model: form.elements["vehicle_model"].value,
 
-</form>
+            variant: form.elements["variant"].value,
+
+            segment: form.elements["segment"].value,
+
+            fuel_type: form.elements["fuel_type"].value,
+
+            colour: form.elements["colour"].value,
+
+            manufacturing_year: Number(form.elements["manufacturing_year"].value),
+
+            vehicle_age_years: Number(form.elements["vehicle_age_years"].value),
+
+            engine_cc: Number(form.elements["engine_cc"].value),
+
+            idv: Number(form.elements["idv"].value),
+
+            ncb_percent: Number(form.elements["ncb_percent"].value),
+
+            claim_history_count: Number(form.elements["claim_history_count"].value),
+
+            policy_type: form.elements["policy_type"].value,
+
+            usage_type: form.elements["usage_type"].value,
+
+            num_addons: Number(form.elements["num_addons"].value)
+
+        }
+
+    };
+
+    console.log(payload);
+
+    try{
+
+        const response = await fetch(
+
+            `${BASE_URL}/predict-quote`,
+
+            {
+
+                method:"POST",
+
+                headers:{
+
+                    "Content-Type":"application/json"
+
+                },
+
+                body:JSON.stringify(payload)
+
+            }
+
+        );
+
+        console.log(response.status);
+
+        const data = await response.json();
+
+        let responseText = data.assistant_response;
+
+responseText = responseText
+.replace(/\*\*/g,"")
+.replace(/\*/g,"")
+.replace(/##/g,"")
+.replace(/#/g,"")
+.replace(/\n/g,"<br>"); 
+
+        console.log(data);
+
+        removeLoading();
+
+addBotMessage(`
+
+<div class="premium-card">
+
+    <div class="premium-top">
+
+        <div>
+
+            <div class="premium-title">
+
+                ACKO INSURANCE QUOTE
+
+            </div>
+
+            <div class="premium-vehicle">
+
+                <div class="vehicle-name">
+
+                    ${payload.details.manufacturing_year || ""}
+                    ${payload.details.vehicle_make || ""}
+                    ${payload.details.vehicle_model || ""}
+
+                </div>
+
+                <div class="vehicle-info">
+
+                    ${payload.details.variant || ""}
+                    •
+                    ${payload.details.fuel_type || ""}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="premium-date">
+
+            Generated Today
+
+        </div>
+
+    </div>
+
+    <div class="premium-box">
+
+        <div class="premium-label">
+
+            ESTIMATED ANNUAL PREMIUM
+
+        </div>
+
+        <div class="premium-price">
+
+            ₹${data.predicted_premium.toLocaleString()}
+
+        </div>
+
+        <div class="premium-month">
+
+            ≈ ₹${(data.predicted_premium/12).toFixed(0)} / month
+
+        </div>
+
+    </div>
+
+    <table class="premium-table">
+
+        <tr>
+
+            <td>IDV</td>
+
+            <td>₹${payload.details.idv}</td>
+
+        </tr>
+
+        <tr>
+
+            <td>No Claim Bonus</td>
+
+            <td>${payload.details.ncb_percent}%</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Add-ons</td>
+
+            <td>${payload.details.num_addons}</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Registered State</td>
+
+            <td>${payload.details.state}</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Policy</td>
+
+            <td>${payload.details.policy_type}</td>
+
+        </tr>
+
+    </table>
+
+    <div class="premium-summary">
+
+        ${responseText}
+
+    </div>
 
 </div>
 
-</div>
+`);
 
-`;
+    }
 
-chatMessages.scrollTop=
-chatMessages.scrollHeight;
+    catch(err){
+
+        removeLoading();
+
+        addBotMessage(
+
+            "Prediction Failed."
+
+        );
+
+        console.log(err);
+
+    }
 
 }
 
-function showHealthQuoteForm(){
+async function showCarQuoteForm(){
 
-chatMessages.innerHTML += `
+    const response = await fetch("forms/carQuoteForm.html");
 
-<div class="bot-message">
+    const html = await response.text();
 
-<div class="avatar">🤖</div>
+    chatMessages.insertAdjacentHTML("beforeend", html);
 
-<div class="message">
+    chatMessages.scrollTop = chatMessages.scrollHeight;
 
-<h3>❤️ Health Insurance Quote</h3>
+    document
+        .getElementById("carQuoteForm")
+        .addEventListener(
+            "submit",
+            submitCarQuote
+        );
 
-<form id="healthQuoteForm">
+    const carData = {
 
-<input type="number" placeholder="Age">
+        Hyundai:{
+            models:[
+                "i20",
+                "Creta",
+                "Venue",
+                "Verna"
+            ]
+        },
 
-<select>
+        "Maruti Suzuki":{
+            models:[
+                "Swift",
+                "Baleno",
+                "Brezza",
+                "Dzire"
+            ]
+        },
 
-<option>Male</option>
+        Tata:{
+            models:[
+                "Punch",
+                "Nexon",
+                "Altroz",
+                "Harrier"
+            ]
+        },
 
-<option>Female</option>
+        Mahindra:{
+            models:[
+                "XUV300",
+                "XUV700",
+                "Scorpio N",
+                "Thar"
+            ]
+        },
 
-</select>
+        Honda:{
+            models:[
+                "Amaze",
+                "City",
+                "Elevate"
+            ]
+        },
 
-<input type="number" placeholder="BMI">
+        Toyota:{
+            models:[
+                "Glanza",
+                "Urban Cruiser Hyryder",
+                "Innova Hycross"
+            ]
+        },
 
-<select>
+        Kia:{
+            models:[
+                "Sonet",
+                "Seltos",
+                "Carens"
+            ]
+        },
 
-<option>Smoker</option>
+        MG:{
+            models:[
+                "Astor",
+                "Hector",
+                "Comet EV"
+            ]
+        }
 
-<option>Non Smoker</option>
+    };
 
-</select>
+    const make = document.getElementById("vehicle_make");
+    const model = document.getElementById("vehicle_model");
 
-<input type="number" placeholder="Children">
 
-<input type="text" placeholder="Region">
+    make.onchange = function(){
 
-<button>
+    // Reset Vehicle Model dropdown
+    model.innerHTML = `
+        <option value="" selected disabled>
+            Select Vehicle Model
+        </option>
+    `;
 
-Predict Premium
+    // Reset Variant dropdown
+    variant.innerHTML = `
+        <option value="" selected disabled>
+            Select Variant
+        </option>
+    `;
 
-</button>
+    if(!carData[this.value]) return;
 
-</form>
+    carData[this.value].models.forEach(m=>{
 
-</div>
+        model.innerHTML += `<option>${m}</option>`;
 
-</div>
+    });
 
-`;
+};
 
-chatMessages.scrollTop=
-chatMessages.scrollHeight;
+    make.dispatchEvent(new Event("change"));
+
+
+
+    const variant = document.getElementById("variant");
+
+    const variants = {
+
+        "i20":[
+            "Magna",
+            "Sportz",
+            "Asta"
+        ],
+
+        "Creta":[
+            "E",
+            "S",
+            "SX",
+            "SX(O)"
+        ],
+
+        "Venue":[
+            "E",
+            "S",
+            "SX"
+        ],
+
+        "Verna":[
+            "EX",
+            "SX",
+            "SX(O)"
+        ],
+
+        "Swift":[
+            "LXi",
+            "VXi",
+            "ZXi"
+        ],
+
+        "Baleno":[
+            "Sigma",
+            "Delta",
+            "Zeta",
+            "Alpha"
+        ],
+
+        "Brezza":[
+            "LXi",
+            "VXi",
+            "ZXi"
+        ],
+
+        "Dzire":[
+            "LXi",
+            "VXi",
+            "ZXi"
+        ],
+
+        "Punch":[
+            "Pure",
+            "Adventure",
+            "Accomplished"
+        ],
+
+        "Nexon":[
+            "Smart",
+            "Pure",
+            "Creative",
+            "Fearless"
+        ],
+
+        "Altroz":[
+            "XE",
+            "XM",
+            "XZ"
+        ],
+
+        "Harrier":[
+            "Smart",
+            "Pure",
+            "Fearless"
+        ],
+
+        "XUV300":[
+            "W2",
+            "W4",
+            "W6",
+            "W8"
+        ],
+
+        "XUV700":[
+            "MX",
+            "AX3",
+            "AX5",
+            "AX7"
+        ],
+
+        "Scorpio N":[
+            "Z2",
+            "Z4",
+            "Z6",
+            "Z8"
+        ],
+
+        "Thar":[
+            "AX(O)",
+            "LX"
+        ],
+
+        "Amaze":[
+            "E",
+            "S",
+            "VX"
+        ],
+
+        "City":[
+            "V",
+            "VX",
+            "ZX"
+        ],
+
+        "Elevate":[
+            "SV",
+            "V",
+            "VX",
+            "ZX"
+        ],
+
+        "Glanza":[
+            "E",
+            "S",
+            "G",
+            "V"
+        ],
+
+        "Urban Cruiser Hyryder":[
+            "E",
+            "S",
+            "G",
+            "V"
+        ],
+
+        "Innova Hycross":[
+            "GX",
+            "VX",
+            "ZX"
+        ],
+
+        "Sonet":[
+            "HTE",
+            "HTK",
+            "HTX",
+            "GTX+"
+        ],
+
+        "Seltos":[
+            "HTE",
+            "HTK",
+            "HTX",
+            "GTX+"
+        ],
+
+        "Carens":[
+            "Premium",
+            "Prestige",
+            "Luxury"
+        ],
+
+        "Astor":[
+            "Sprint",
+            "Shine",
+            "Select",
+            "Sharp"
+        ],
+
+        "Hector":[
+            "Style",
+            "Shine",
+            "Smart",
+            "Sharp"
+        ],
+
+        "Comet EV":[
+            "Pace",
+            "Play",
+            "Plush"
+        ]
+
+    };
+
+    model.onchange = function(){
+
+    variant.innerHTML = `
+        <option value="" selected disabled>
+            Select Variant
+        </option>
+    `;
+
+    if(!variants[this.value]) return;
+
+    variants[this.value].forEach(v=>{
+
+        variant.innerHTML += `<option>${v}</option>`;
+
+    });
+
+};
+
+    make.dispatchEvent(new Event("change"));
 
 }
 
 
+async function submitCarQuote(e){
+
+    e.preventDefault();
+
+    const form = document.getElementById("carQuoteForm");
+
+    showLoading();
+
+    const payload = {
+
+        insurance_type: "car",
+
+        details: {
+
+            customer_age: Number(form.elements["customer_age"].value),
+
+            city: form.elements["city"].value,
+
+            state: form.elements["state"].value,
+
+            city_tier: Number(form.elements["city_tier"].value),
+
+            city_risk_score: Number(form.elements["city_risk_score"].value),
+
+            vehicle_make: form.elements["vehicle_make"].value,
+
+            vehicle_model: form.elements["vehicle_model"].value,
+
+            variant: form.elements["variant"].value,
+
+            segment: form.elements["segment"].value,
+
+            fuel_type: form.elements["fuel_type"].value,
+
+            colour: form.elements["colour"].value,
+
+            manufacturing_year: Number(form.elements["manufacturing_year"].value),
+
+            vehicle_age_years: Number(form.elements["vehicle_age_years"].value),
+
+            engine_cc: Number(form.elements["engine_cc"].value),
+
+            idv: Number(form.elements["idv"].value),
+
+            ncb_percent: Number(form.elements["ncb_percent"].value),
+
+            claim_history_count: Number(form.elements["claim_history_count"].value),
+
+            policy_type: form.elements["policy_type"].value,
+
+            previous_insurer: form.elements["previous_insurer"].value,
+
+            num_addons: Number(form.elements["num_addons"].value)
+
+        }
+
+    };
+
+    console.log(payload);
+
+    try{
+
+        const response = await fetch(
+
+            `${BASE_URL}/predict-quote`,
+
+            {
+
+                method:"POST",
+
+                headers:{
+
+                    "Content-Type":"application/json"
+
+                },
+
+                body:JSON.stringify(payload)
+
+            }
+
+        );
+
+        console.log(response.status);
+
+        const data = await response.json();
+
+        let responseText = data.assistant_response;
+
+        responseText = responseText
+        .replace(/\*\*/g,"")
+        .replace(/\*/g,"")
+        .replace(/##/g,"")
+        .replace(/#/g,"")
+        .replace(/\n/g,"<br>");
+
+        console.log(data);
+
+        removeLoading();
+
+        addBotMessage(`
+
+<div class="premium-card">
+
+    <div class="premium-top">
+
+        <div>
+
+            <div class="premium-title">
+
+                ACKO INSURANCE QUOTE
+
+            </div>
+
+            <div class="premium-vehicle">
+
+    <div class="vehicle-name">
+
+        ${payload.details.manufacturing_year || ""}
+        ${payload.details.vehicle_make || ""}
+        ${payload.details.vehicle_model || ""}
+
+    </div>
+
+    <div class="vehicle-info">
+
+        ${payload.details.variant || ""}
+        •
+        ${payload.details.fuel_type || ""}
+
+    </div>
+
+</div>
+
+            </div>
+
+        <div class="premium-date">
+
+            Generated Today
+
+        </div>
+
+    </div>
+
+    <div class="premium-box">
+
+        <div class="premium-label">
+
+            ESTIMATED ANNUAL PREMIUM
+
+        </div>
+
+        <div class="premium-price">
+
+            ₹${Number(data.predicted_premium).toLocaleString()}
+
+        </div>
+
+        <div class="premium-month">
+
+            ≈ ₹${(Number(data.predicted_premium)/12).toFixed(0)} / month
+
+        </div>
+
+    </div>
+
+    <table class="premium-table">
+
+        <tr>
+
+            <td>IDV</td>
+
+            <td>₹${payload.details.idv}</td>
+
+        </tr>
+
+        <tr>
+
+            <td>No Claim Bonus</td>
+
+            <td>${payload.details.ncb_percent}%</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Add-ons</td>
+
+            <td>${payload.details.num_addons}</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Registered State</td>
+
+            <td>${payload.details.state}</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Policy</td>
+
+            <td>${payload.details.policy_type}</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Previous Insurer</td>
+
+            <td>${payload.details.previous_insurer}</td>
+
+        </tr>
+
+    </table>
+
+    <div class="premium-summary">
+
+        ${responseText}
+
+    </div>
+
+</div>
+
+`);
+
+    }
+
+    catch(err){
+
+        removeLoading();
+
+        addBotMessage("Prediction Failed.");
+
+        console.log(err);
+
+    }
+
+}
+
+// ===========================================
+// SHOW HEALTH QUOTE FORM
+// ===========================================
+
+async function showHealthQuoteForm(){
+
+    const response =
+        await fetch("forms/healthQuoteForm.html");
+
+    const html =
+        await response.text();
+
+    chatMessages.insertAdjacentHTML(
+        "beforeend",
+        html
+    );
+
+    chatMessages.scrollTop =
+        chatMessages.scrollHeight;
+
+    document
+        .getElementById("healthQuoteForm")
+        .addEventListener(
+            "submit",
+            submitHealthQuote
+        );
+
+}
+
+async function submitHealthQuote(e){
+
+    e.preventDefault();
+
+    const form = document.getElementById("healthQuoteForm");
+
+    showLoading();
+
+    const payload = {
+
+        insurance_type: "health",
+
+        details: {
+
+            plan_name: form.elements["plan_name"].value,
+
+            plan_category: form.elements["plan_category"].value,
+
+            age: Number(form.elements["age"].value),
+
+            gender: form.elements["gender"].value,
+
+            num_members: Number(form.elements["num_members"].value),
+
+            city_tier: Number(form.elements["city_tier"].value),
+
+            state: form.elements["state"].value,
+
+            bmi_category: form.elements["bmi_category"].value,
+
+            smoke: form.elements["smoke"].value === "Yes" ? 1 : 0,
+
+            has_pre_existing: form.elements["has_pre_existing"].value === "Yes" ? 1 : 0,
+
+            annual_checkup: form.elements["annual_checkup"].value === "Yes" ? 1 : 0,
+
+            ncb_years: Number(form.elements["ncb_years"].value),
+
+            sum_insured: Number(form.elements["sum_insured"].value),
+
+            deductible: Number(form.elements["deductible"].value),
+
+            num_addons: Number(form.elements["num_addons"].value),
+
+            addons_list: form.elements["addons_list"].value,
+
+            has_maternity: form.elements["has_maternity"].value === "Yes" ? 1 : 0,
+
+            has_opd: form.elements["has_opd"].value === "Yes" ? 1 : 0,
+
+            policy_tenure: Number(form.elements["policy_tenure"].value),
+
+            prev_insurer: form.elements["prev_insurer"].value
+
+        }
+
+    };
+
+    console.log("Health Payload");
+    console.log(JSON.stringify(payload, null, 2));
+
+    try{
+
+        const response = await fetch(
+
+            `${BASE_URL}/predict-quote`,
+
+            {
+
+                method:"POST",
+
+                headers:{
+
+                    "Content-Type":"application/json"
+
+                },
+
+                body:JSON.stringify(payload)
+
+            }
+
+        );
+
+        console.log(response.status);
+
+        const data = await response.json();
+
+        let responseText = data.assistant_response;
+
+        responseText = responseText
+            .replace(/\*\*/g,"")
+            .replace(/\*/g,"")
+            .replace(/##/g,"")
+            .replace(/#/g,"")
+            .replace(/\n/g,"<br>");
+
+        console.log(data);
+
+                removeLoading();
+
+        addBotMessage(`
+
+<div class="premium-card">
+
+    <div class="premium-top">
+
+        <div>
+
+            <div class="premium-title">
+
+                ACKO HEALTH INSURANCE
+
+            </div>
+
+            <div class="premium-vehicle">
+
+                <div class="vehicle-name">
+
+                    ${payload.details.plan_name || ""}
+
+                </div>
+
+                <div class="vehicle-info">
+
+                    ${payload.details.plan_category || ""}
+                    •
+                    ${payload.details.num_members || ""} Member(s)
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="premium-date">
+
+            Generated Today
+
+        </div>
+
+    </div>
+
+    <div class="premium-box">
+
+        <div class="premium-label">
+
+            ESTIMATED ANNUAL PREMIUM
+
+        </div>
+
+        <div class="premium-price">
+
+            ₹${Number(data.predicted_premium).toLocaleString()}
+
+        </div>
+
+        <div class="premium-month">
+
+            ≈ ₹${(Number(data.predicted_premium)/12).toFixed(0)} / month
+
+        </div>
+
+    </div>
+
+    <table class="premium-table">
+
+        <tr>
+
+            <td>Age</td>
+
+            <td>${payload.details.age} Years</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Gender</td>
+
+            <td>${payload.details.gender}</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Sum Insured</td>
+
+            <td>₹${Number(payload.details.sum_insured).toLocaleString()}</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Policy Tenure</td>
+
+            <td>${payload.details.policy_tenure} Year(s)</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Add-ons</td>
+
+            <td>${payload.details.num_addons}</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Previous Insurer</td>
+
+            <td>${payload.details.prev_insurer}</td>
+
+        </tr>
+
+    </table>
+
+    <div class="premium-summary">
+
+        ${responseText}
+
+    </div>
+
+</div>
+
+`);
+
+    }
+
+    catch(err){
+
+        removeLoading();
+
+        addBotMessage(
+
+            "Prediction Failed."
+
+        );
+
+        console.log(err);
+
+    }
+
+}
 
 // ===========================================
 // SEND MESSAGE
@@ -427,117 +1510,25 @@ function removeLoading(){
     }
 
 }
-
 // ===========================================
 // SEND MESSAGE
 // ===========================================
 
 async function sendMessage(){
 
-    const question =
-    userInput.value.trim();
+    const question = userInput.value.trim();
 
-    if(question==="") return;
+    if(question === "") return;
 
     addUserMessage(question);
 
-    userInput.value="";
-
-    const lower =
-    question.toLowerCase();
-
-    // ===============================
-    // ROUTER
-    // ===============================
-
-    if(
-
-        lower.includes("claim")
-
-        ||
-
-        lower.includes("damage")
-
-        ||
-
-        lower.includes("accident")
-
-    ){
-
-        addBotMessage(
-
-            "Redirecting you to Claim Service..."
-
-        );
-
-        setTimeout(()=>{
-
-            window.location.href="claim.html";
-
-        },1200);
-
-        return;
-
-    }
-
-    if(
-
-        lower.includes("quote")
-
-        ||
-
-        lower.includes("premium")
-
-    ){
-
-        addBotMessage(
-
-            "Redirecting you to Premium Quotation..."
-
-        );
-
-        setTimeout(()=>{
-
-            window.location.href="quote.html";
-
-        },1200);
-
-        return;
-
-    }
-
-    if(
-
-        lower.includes("health")
-
-    ){
-
-        addBotMessage(
-
-            "Opening Health Insurance..."
-
-        );
-
-        setTimeout(()=>{
-
-            window.location.href="quote.html?type=health";
-
-        },1200);
-
-        return;
-
-    }
-
-    // ===============================
-    // GEMINI CHAT
-    // ===============================
+    userInput.value = "";
 
     showLoading();
 
     try{
 
-        const response =
-        await fetch(
+        const response = await fetch(
 
             `${BASE_URL}/chat`,
 
@@ -553,7 +1544,7 @@ async function sendMessage(){
 
                 body:JSON.stringify({
 
-                    user_query:question
+                    user_query: question
 
                 })
 
@@ -561,16 +1552,61 @@ async function sendMessage(){
 
         );
 
-        const data =
-        await response.json();
+        const data = await response.json();
+
+        console.log("CHAT RESPONSE:", data);
 
         removeLoading();
 
-        addBotMessage(
+        // ===================================
+        // AI WORKFLOW DETECTION
+        // ===================================
 
-            data.response
+        if(data.workflow === "quote"){
 
-        );
+        addBotMessage(data.message);
+
+            if(data.insurance_type === "bike"){
+
+            await showBikeQuoteForm();
+
+            }
+
+        else if(data.insurance_type === "car"){
+
+            await showCarQuoteForm();
+
+            }
+
+        else if(data.insurance_type === "health"){
+
+            await showHealthQuoteForm();
+
+        }
+
+        return;
+
+}
+
+// ===================================
+// CLAIM WORKFLOW
+// ===================================
+
+if(data.workflow === "claim"){
+
+    addBotMessage(data.message);
+
+    await showClaimForm();
+
+    return;
+
+}
+
+        // ===================================
+        // NORMAL RAG CHAT
+        // ===================================
+
+        addBotMessage(data.response);
 
     }
 
@@ -615,3 +1651,79 @@ userInput.addEventListener(
     }
 
 );
+
+const bikeModels = {
+
+    Honda: [
+
+        "Activa 6G",
+
+        "Dio 125",
+
+        "Shine",
+
+        "SP125"
+
+    ],
+
+    Hero: [
+
+        "Splendor Plus",
+
+        "HF Deluxe",
+
+        "Xtreme 160R"
+
+    ],
+
+    TVS: [
+
+        "Jupiter",
+
+        "Apache RTR 160",
+
+        "Apache RTR 200",
+
+        "NTorq"
+
+    ],
+
+    Bajaj: [
+
+        "Pulsar 150",
+
+        "Pulsar NS200",
+
+        "Dominar 400"
+
+    ],
+
+    Yamaha: [
+
+        "FZ",
+
+        "R15",
+
+        "MT15"
+
+    ],
+
+    Suzuki: [
+
+        "Access 125",
+
+        "Gixxer"
+
+    ],
+
+    "Royal Enfield":[
+
+        "Classic 350",
+
+        "Meteor 350",
+
+        "Hunter 350"
+
+    ]
+
+};

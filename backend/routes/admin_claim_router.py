@@ -8,7 +8,6 @@ from backend.management.claim_service import (
     approve_claim_service,
     reject_claim_service,
     get_claim_images_service,
-    get_claim_analysis_service,
     get_complete_claim_service,
     delete_claim_service,
     get_pending_claims_service,
@@ -82,14 +81,6 @@ def reject_claim(claim_id: int):
 def claim_images(claim_id: int):
     try:
         return get_claim_images_service(claim_id)
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-
-@router.get("/{claim_id}/analysis")
-def claim_analysis(claim_id: int):
-    try:
-        return get_claim_analysis_service(claim_id)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

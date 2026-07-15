@@ -45,3 +45,9 @@ app.include_router(admin_chat_router)
 app.include_router(customer_router)
 app.include_router(admin_claim_router)
 app.include_router(auth_router)
+
+
+@app.get("/test")
+def test():
+    print("TEST ROUTE CALLED")
+    return {"message": "working"}

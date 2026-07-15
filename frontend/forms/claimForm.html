@@ -1,0 +1,330 @@
+<div class="bot-message">
+
+    <div class="avatar">🤖</div>
+
+    <div class="message">
+
+        <form id="claimForm" enctype="multipart/form-data">
+
+            <h2>📄 Motor Insurance Claim Form</h2>
+
+            <p class="form-subtitle">
+                Upload damage images and fill the policy details below to analyze your insurance claim.
+            </p>
+
+            <!-- ================= IMAGE UPLOAD ================= -->
+
+            <div class="form-section">
+
+                <h3>📷 Upload Damage Images</h3>
+
+                <div class="form-grid">
+
+                    <div class="form-group" style="grid-column:1/-1;">
+
+                        <label>Vehicle Damage Images (Maximum 6 Images)</label>
+
+                        <input
+                            type="file"
+                            id="claim_images"
+                            name="images"
+                            accept="image/png,image/jpeg,image/jpg"
+                            required>
+
+                        <small>
+                            Upload clear images of the damaged vehicle from different angles (Maximum 6 Images).
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ================= POLICY DETAILS ================= -->
+
+            <div class="form-section">
+
+                <h3>📋 Policy Details</h3>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label>Policy Type</label>
+
+                        <select
+                            name="policy_type"
+                            required>
+
+                            <option value="" selected disabled>
+                                Select Policy Type
+                            </option>
+
+                            <option>Comprehensive</option>
+                            <option>Third Party</option>
+                            <option>Own Damage</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Policy Age</label>
+
+                        <select
+                            name="policy_age"
+                            required>
+
+                            <option value="" selected disabled>
+                                Select Policy Age
+                            </option>
+
+                            <option>Less than 1 Year</option>
+                            <option>1 Year</option>
+                            <option>2 Years</option>
+                            <option>3 Years</option>
+                            <option>More than 3 Years</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Annual Premium (₹)</label>
+
+                        <input
+                            type="number"
+                            name="annual_premium"
+                            placeholder="Example: 14500"
+                            min="0"
+                            required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Insurance Declared Value (IDV)</label>
+
+                        <input
+                            type="number"
+                            name="idv"
+                            placeholder="Example: 850000"
+                            min="0"
+                            required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Vehicle Age (Years)</label>
+
+                        <input
+                            type="number"
+                            name="vehicle_age"
+                            placeholder="Example: 3"
+                            min="0"
+                            required>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+                        <!-- ================= COVERAGE DETAILS ================= -->
+
+            <div class="form-section">
+
+                <h3>🛡 Coverage Details</h3>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label>Previous Claims</label>
+
+                        <select
+                            name="previous_claims"
+                            required>
+
+                            <option value="" selected disabled>
+                                Select Previous Claims
+                            </option>
+
+                            <option>None</option>
+                            <option>1 Claim</option>
+                            <option>2 Claims</option>
+                            <option>3+ Claims</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>No Claim Bonus (NCB)</label>
+
+                        <select
+                            name="ncb"
+                            required>
+
+                            <option value="" selected disabled>
+                                Select NCB
+                            </option>
+
+                            <option>0%</option>
+                            <option>20%</option>
+                            <option>25%</option>
+                            <option>35%</option>
+                            <option>50%</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Zero Depreciation</label>
+
+                        <select
+                            name="zero_dep"
+                            required>
+
+                            <option value="" selected disabled>
+                                Select Zero Depreciation
+                            </option>
+
+                            <option>Yes</option>
+                            <option>No</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Engine Protection</label>
+
+                        <select
+                            name="engine_protection"
+                            required>
+
+                            <option value="" selected disabled>
+                                Select Engine Protection
+                            </option>
+
+                            <option>Yes</option>
+                            <option>No</option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ================= CUSTOMER DETAILS ================= -->
+
+            <div class="form-section">
+
+                <h3>👤 Customer Details</h3>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label>Customer Name</label>
+
+                        <input
+                            type="text"
+                            name="customer_name"
+                            placeholder="Example: Rahul Sharma"
+                            required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>State</label>
+
+                        <select
+                            name="state"
+                            required>
+
+                            <option value="" selected disabled>
+                                Select State
+                            </option>
+
+                            <option>Tamil Nadu</option>
+                            <option>Kerala</option>
+                            <option>Karnataka</option>
+                            <option>Telangana</option>
+                            <option>Maharashtra</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Age Group</label>
+
+                        <select
+                            name="age_group"
+                            required>
+
+                            <option value="" selected disabled>
+                                Select Age Group
+                            </option>
+
+                            <option>18-25</option>
+                            <option>26-35</option>
+                            <option>36-45</option>
+                            <option>46-60</option>
+                            <option>60+</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>City Tier</label>
+
+                        <select
+                            name="city_tier"
+                            required>
+
+                            <option value="" selected disabled>
+                                Select City Tier
+                            </option>
+
+                            <option value="1">Tier 1</option>
+                            <option value="2">Tier 2</option>
+                            <option value="3">Tier 3</option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+                        <button
+                class="premium-btn"
+                type="submit">
+
+                🚀 Analyze Claim
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>

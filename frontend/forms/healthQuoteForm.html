@@ -1,0 +1,412 @@
+<div class="bot-message">
+
+    <div class="avatar">🤖</div>
+
+    <div class="message">
+
+        <form id="healthQuoteForm">
+
+            <h2>❤️ Health Quotation Form</h2>
+
+            <p class="form-subtitle">
+                Fill your health details below to predict your insurance premium.
+            </p>
+
+            <!-- ================= PERSONAL DETAILS ================= -->
+
+            <div class="form-section">
+
+                <h3>👤 Personal Details</h3>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label>Plan Name</label>
+
+                        <select
+                            name="plan_name"
+                            required>
+
+                            <option value="" selected disabled>
+                                Select Plan
+                            </option>
+
+                            <option>Basic Care</option>
+                            <option>Silver Protect</option>
+                            <option>Gold Shield</option>
+                            <option>Family Secure</option>
+                            <option>Senior Care</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Plan Category</label>
+
+                        <select
+                            name="plan_category"
+                            required>
+
+                            <option value="" selected disabled>
+                                Select Category
+                            </option>
+
+                            <option>Individual</option>
+                            <option>Family Floater</option>
+                            <option>Senior Citizen</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Age</label>
+
+                        <input
+                            type="number"
+                            name="age"
+                            placeholder="30"
+                            required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Gender</label>
+
+                        <select
+                            name="gender"
+                            required>
+
+                            <option value="" selected disabled>
+                                Select Gender
+                            </option>
+
+                            <option>Male</option>
+                            <option>Female</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Number of Members</label>
+
+                        <input
+                            type="number"
+                            name="num_members"
+                            placeholder="2"
+                            required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>State</label>
+
+                        <select
+                            name="state"
+                            required>
+
+                            <option value="" selected disabled>
+                                Select State
+                            </option>
+
+                            <option>Tamil Nadu</option>
+                            <option>Kerala</option>
+                            <option>Karnataka</option>
+                            <option>Telangana</option>
+                            <option>Maharashtra</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>City Tier</label>
+
+                        <select
+                            name="city_tier"
+                            required>
+
+                            <option value="" selected disabled>
+                                Select City Tier
+                            </option>
+
+                            <option value="1">Tier 1</option>
+                            <option value="2">Tier 2</option>
+                            <option value="3">Tier 3</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>BMI Category</label>
+
+                        <select
+                            name="bmi_category"
+                            required>
+
+                            <option value="" selected disabled>
+                                Select BMI Category
+                            </option>
+
+                            <option>Underweight</option>
+                            <option>Normal</option>
+                            <option>Overweight</option>
+                            <option>Obese</option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ================= HEALTH DETAILS ================= -->
+
+            <div class="form-section">
+
+    <h3>❤️ Health Details</h3>
+
+    <div class="form-grid">
+
+        <div class="form-group">
+
+            <label>Smoking</label>
+
+            <select
+                name="smoke"
+                required>
+
+                <option value="" selected disabled>
+                    Select Smoking Status
+                </option>
+
+                <option>No</option>
+                <option>Yes</option>
+
+            </select>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Pre-existing Disease</label>
+
+            <select
+                name="has_pre_existing"
+                required>
+
+                <option value="" selected disabled>
+                    Select Option
+                </option>
+
+                <option>No</option>
+                <option>Yes</option>
+
+            </select>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Annual Health Checkup</label>
+
+            <select
+                name="annual_checkup"
+                required>
+
+                <option value="" selected disabled>
+                    Select Option
+                </option>
+
+                <option>No</option>
+                <option>Yes</option>
+
+            </select>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>No Claim Bonus (Years)</label>
+
+            <input
+                type="number"
+                name="ncb_years"
+                placeholder="2"
+                required>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Sum Insured (₹)</label>
+
+            <input
+                type="number"
+                name="sum_insured"
+                placeholder="500000"
+                required>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Deductible (₹)</label>
+
+            <input
+                type="number"
+                name="deductible"
+                placeholder="5000"
+                required>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Number of Add-ons</label>
+
+            <input
+                type="number"
+                name="num_addons"
+                placeholder="2"
+                required>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Add-ons</label>
+
+            <select
+                name="addons_list"
+                required>
+
+                <option value="" selected disabled>
+                    Select Add-on
+                </option>
+
+                <option>None</option>
+                <option>Critical Illness</option>
+                <option>Room Upgrade</option>
+                <option>Personal Accident</option>
+                <option>Hospital Cash</option>
+                <option>OPD Cover</option>
+
+            </select>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Maternity Cover</label>
+
+            <select
+                name="has_maternity"
+                required>
+
+                <option value="" selected disabled>
+                    Select Option
+                </option>
+
+                <option>No</option>
+                <option>Yes</option>
+
+            </select>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>OPD Cover</label>
+
+            <select
+                name="has_opd"
+                required>
+
+                <option value="" selected disabled>
+                    Select Option
+                </option>
+
+                <option>No</option>
+                <option>Yes</option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================= POLICY DETAILS ================= -->
+
+<div class="form-section">
+
+    <h3>📋 Policy Details</h3>
+
+    <div class="form-grid">
+
+        <div class="form-group">
+
+            <label>Policy Tenure</label>
+
+            <input
+                type="number"
+                name="policy_tenure"
+                placeholder="1"
+                required>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Previous Insurer</label>
+
+            <select
+                name="prev_insurer"
+                required>
+
+                <option value="" selected disabled>
+                    Select Previous Insurer
+                </option>
+
+                <option>ACKO</option>
+                <option>Star Health</option>
+                <option>Niva Bupa</option>
+                <option>ICICI Lombard</option>
+                <option>HDFC ERGO</option>
+                <option>Care Health</option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+</div>
+
+<button
+    class="premium-btn"
+    type="submit">
+
+    🚀 Predict Premium
+
+</button>
+
+        </form>
+
+    </div>
+
+</div>

@@ -21,15 +21,36 @@ def chat(request: ChatRequest):
     # Step 1 : Detect Intent
     intent = classify_intent(user_query)
 
-    # If it is a quote request
+    # ================= QUOTATION =================
+
     if intent in ["bike", "car", "health"]:
 
         return {
-            "user_query": user_query,
-            "workflow":"quote",
-            "insurance_type": intent,
-            "message": f"{intent.capitalize()} insurance detected. Please fill the {intent.capitalize()} Insurance Quote form."
-        }
+
+        "user_query": user_query,
+
+        "workflow": "quote",
+
+        "insurance_type": intent,
+
+        "message": f"Sure! I'll help you with your {intent.capitalize()} Insurance quotation. Please fill in the details below."
+
+    }
+
+
+# ================= CLAIM =================
+
+    if intent == "claim":
+
+        return {
+
+        "user_query": user_query,
+
+        "workflow": "claim",
+
+        "message": "Sure! Please upload the damage images and complete the claim form below."
+
+    }
 
     # Otherwise continue with Module 1 (RAG)
 
@@ -38,7 +59,7 @@ def chat(request: ChatRequest):
     prompt = build_prompt(user_query, top_3_chunks)
 
     response = gemini_client.models.generate_content(
-        model="gemini-2.5-flash",
+        model="gemini-2.5-pro",
         contents=prompt
     )
 

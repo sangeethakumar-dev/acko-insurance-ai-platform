@@ -4,7 +4,6 @@ from backend.database.claim_queries import (
     search_claims,
     update_claim_status,
     get_claim_images,
-    get_claim_analysis,
     delete_claim
 )
 
@@ -81,9 +80,6 @@ def update_claim_status_service(
 # APPROVE CLAIM
 
 def approve_claim_service(claim_id):
-    """
-    Approve claim.
-    """
 
     update_claim_status(
         claim_id,
@@ -98,9 +94,6 @@ def approve_claim_service(claim_id):
 # REJECT CLAIM
 
 def reject_claim_service(claim_id):
-    """
-    Reject claim.
-    """
 
     update_claim_status(
         claim_id,
@@ -122,21 +115,6 @@ def get_claim_images_service(claim_id):
     return get_claim_images(claim_id)
 
 
-# GET AI ANALYSIS
-
-def get_claim_analysis_service(claim_id):
-    """
-    Return AI damage analysis.
-    """
-
-    analysis = get_claim_analysis(claim_id)
-
-    if analysis is None:
-        raise ValueError("AI analysis not found.")
-
-    return analysis
-
-
 # COMPLETE CLAIM DETAILS
 
 def get_complete_claim_service(claim_id):
@@ -153,9 +131,7 @@ def get_complete_claim_service(claim_id):
 
         "claim": claim,
 
-        "images": get_claim_images(claim_id),
-
-        "analysis": get_claim_analysis(claim_id)
+        "images": get_claim_images(claim_id)
 
     }
 
@@ -193,9 +169,6 @@ def get_pending_claims_service():
 # GET APPROVED CLAIMS
 
 def get_approved_claims_service():
-    """
-    Return all approved claims.
-    """
 
     claims = get_all_claims_admin()
 
