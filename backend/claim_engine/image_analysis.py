@@ -53,7 +53,7 @@ def analyze_images(image_paths: list[str]) -> dict:
 
     # Gemini Vision
     response = gemini_client.models.generate_content(
-        model="gemini-2.5-pro",
+        model="gemini-flash-latest",
         contents=contents,
     )
 

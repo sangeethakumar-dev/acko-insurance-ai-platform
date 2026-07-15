@@ -1085,3 +1085,118 @@ color:#444;
     box-shadow:0 15px 30px rgba(91,43,224,.35);
 
 }
+
+/* ============================
+   CLAIM FORM UI
+============================ */
+
+.claim-form{
+
+    max-width:850px;
+    margin:20px auto;
+    background:#ffffff;
+    padding:30px;
+    border-radius:18px;
+    box-shadow:0 8px 25px rgba(0,0,0,0.08);
+
+}
+
+.claim-form h2{
+
+    font-size:36px;
+    margin-bottom:10px;
+    color:#222;
+
+}
+
+.claim-form p{
+
+    color:#666;
+    margin-bottom:25px;
+
+}
+
+.claim-form h3{
+
+    margin-top:30px;
+    margin-bottom:15px;
+    color:#5B2CF4;
+
+}
+
+.form-grid{
+
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+
+}
+
+.form-group{
+
+    display:flex;
+    flex-direction:column;
+
+}
+
+.form-group label{
+
+    font-weight:600;
+    margin-bottom:6px;
+
+}
+
+.form-group input,
+.form-group select{
+
+    height:48px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    padding:0 14px;
+    font-size:15px;
+
+}
+
+.form-group input:focus,
+.form-group select:focus{
+
+    border-color:#6d3df5;
+    outline:none;
+
+}
+
+input[type=file]{
+
+    padding:10px;
+    border:1px dashed #bbb;
+    border-radius:10px;
+
+}
+
+.claim-btn{
+
+    width:100%;
+    margin-top:30px;
+    padding:16px;
+    border:none;
+    border-radius:12px;
+    background:linear-gradient(90deg,#6d3df5,#5b2cf4);
+    color:white;
+    font-size:18px;
+    font-weight:700;
+    cursor:pointer;
+
+}
+
+.claim-btn:hover{
+
+    opacity:.95;
+
+}
+
+input[type=file]{
+
+    margin-top:10px;
+    margin-bottom:15px;
+
+}

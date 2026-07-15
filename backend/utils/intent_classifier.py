@@ -56,10 +56,16 @@ User Query:
 {user_query}
 """
 
-    response = gemini_client.models.generate_content(
-        model="gemini-2.5-pro",
+    try:
+        response = gemini_client.models.generate_content(
+        model="gemini-flash-latest",
         contents=prompt
     )
+
+    except Exception as e:
+        print("Intent Classifier Error:", e)
+        return "general"
+
 
     intent = response.text.strip().lower()
 

@@ -1727,3 +1727,102 @@ const bikeModels = {
     ]
 
 };
+
+// ===========================================
+// AUTO OPEN BIKE QUOTATION FORM
+// ===========================================
+
+window.addEventListener("DOMContentLoaded", async () => {
+
+    const params = new URLSearchParams(window.location.search);
+
+    const workflow = params.get("workflow");
+    const type = params.get("type");
+
+    if (workflow === "quote" && type === "bike") {
+
+        addBotMessage("🚲 Sure! I'll help you get a Bike Insurance quotation.");
+
+        await showBikeQuoteForm();
+    }
+
+});
+
+window.addEventListener("DOMContentLoaded", () => {
+
+    const params = new URLSearchParams(window.location.search);
+
+    const workflow = params.get("workflow");
+    const type = params.get("type");
+
+
+});
+
+window.addEventListener("DOMContentLoaded", async () => {
+
+    const params = new URLSearchParams(window.location.search);
+
+console.log("Form =", params.get("form"));
+
+if (params.get("form") === "health") {
+    await showHealthQuoteForm();
+}
+
+});
+
+// ===========================================
+// AUTO OPEN HEALTH QUOTATION FORM
+// ===========================================
+
+window.addEventListener("DOMContentLoaded", async () => {
+
+    const params = new URLSearchParams(window.location.search);
+
+    if (params.get("form") === "health") {
+
+        await showHealthQuoteForm();
+
+    }
+
+});
+
+window.addEventListener("DOMContentLoaded", async () => {
+
+    const params = new URLSearchParams(window.location.search);
+
+    switch (params.get("form")) {
+
+        case "bike":
+            await showBikeQuoteForm();
+            break;
+
+        case "car":
+            await showCarQuoteForm();
+            break;
+
+        case "health":
+            await showHealthQuoteForm();
+            break;
+
+        case "claim":
+            await showClaimForm();
+            break;
+    }
+
+});
+
+window.addEventListener("DOMContentLoaded", async () => {
+
+    const params = new URLSearchParams(window.location.search);
+
+    console.log("Form =", params.get("form"));
+
+    if (params.get("form") === "health") {
+
+        console.log("Opening Health Form");
+
+        await showHealthQuoteForm();
+
+    }
+
+});

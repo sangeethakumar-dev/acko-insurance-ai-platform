@@ -1,126 +1,203 @@
 # ACKO Insurance AI Platform
 
-An end-to-end AI-powered insurance assistant platform built using FastAPI, Gemini API, RAG, Machine Learning, PostgreSQL, ChromaDB, and AWS.
+An AI-powered Insurance Management Platform built using FastAPI, Machine Learning, Google Gemini, PostgreSQL and ChromaDB.
 
 ---
 
-# Project Overview
+## Features
 
-This platform provides AI-powered assistance for both customers and admin users in an insurance system.
+### Customer Portal
 
-The system contains:
-- Document RAG for policy Q&A
-- Machine Learning for premium prediction
-- Gemini Vision for claim analysis
-- SQL RAG for admin analytics
-- AI Router for intelligent query routing
-
----
-
-# Features
-
-## User Portal
-- Policy Q&A Assistant
-- Insurance Premium Quote Prediction
-- Claim Filing & Damage Analysis
-- Health Insurance Support
-
-## Admin Portal
-- Claims Dashboard
-- Business Analytics
-- SQL AI Assistant
-- Customer Insights
+- Customer Login & Registration
+- AI Insurance Assistant
+- PDF Policy Chatbot (RAG)
+- Bike Insurance Premium Prediction
+- Car Insurance Premium Prediction
+- Health Insurance Premium Prediction
+- AI Claim Submission
+- Customer Dashboard
 
 ---
 
-# Tech Stack
+### Admin Portal
 
-## Frontend
+- Admin Login
+- SQL RAG Assistant
+- Natural Language → SQL
+- Dashboard APIs
+- Claim Management APIs
+- Policy Management APIs
+
+---
+
+## AI Modules
+
+### Module 1 — PDF RAG
+
+- PDF Loader
+- Custom Chunking
+- Google Gemini Embeddings
+- ChromaDB
+- Similarity Search
+- Gemini Answer Generation
+
+---
+
+### Module 2 — ML Premium Prediction
+
+Supports
+
+- Bike Insurance
+- Car Insurance
+- Health Insurance
+
+Workflow
+
+User Input
+↓
+
+ML Model
+↓
+
+Premium Prediction
+↓
+
+Gemini Explanation
+
+---
+
+### Module 3 — AI Claim Engine
+
+- Upload Vehicle Images
+- Image Analysis
+- Damage Detection
+- Fraud Risk Estimation
+- Repair Cost Estimation
+
+---
+
+### Module 4 — Customer Frontend
+
+HTML
+
+CSS
+
+JavaScript
+
+Responsive Dashboard
+
+Interactive AI Assistant
+
+---
+
+### Module 5 — SQL RAG
+
+Admin only
+
+Natural Language
+
+↓
+
+Gemini
+
+↓
+
+SQL Query
+
+↓
+
+PostgreSQL
+
+↓
+
+Answer
+
+---
+
+## Tech Stack
+
+Frontend
+
 - HTML
 - CSS
 - JavaScript
 
-## Backend
+Backend
+
 - FastAPI
 - Python
 
-## AI / ML
-- Gemini API
-- RAG
-- LangChain
-- Machine Learning
+AI
 
-## Databases
-- PostgreSQL
+- Google Gemini
+- RAG
 - ChromaDB
 
-## Cloud
-- AWS EC2
-- AWS S3
+Machine Learning
 
----
+- Scikit-Learn
+- Joblib
+- Pandas
 
-# Project Architecture
+Database
 
-Frontend (HTML/CSS/JS)
-↓
-FastAPI Backend
-↓
-Main Router / AI Orchestrator
-↓
------------------------------------------
-|           |            |             |
-SQL RAG   PDF RAG    ML Model    Claim Vision
-↓           ↓            ↓             ↓
-PostgreSQL ChromaDB   Pickle       Gemini Vision
-            ↓
-        Gemini API
-
----
-
-# Folder Structure
-
-acko-insurance-ai/
-│
-├── frontend/
-├── backend/
-├── rag/
-│   ├── pdf_rag/
-│   ├── sql_rag/
-│
-├── ml_models/
-├── database/
-├── chroma_db/
-├── uploads/
-├── docs/
-│
-├── app.py
-├── main.py
-├── requirements.txt
-└── .env
-
----
-
-# Modules
-
-## Module 1 — Document RAG
-- Policy Q&A chatbot using insurance PDFs
-
-## Module 2 — ML Prediction
-- Insurance premium prediction
-
-## Module 3 — Claim Analysis
-- Damage analysis using image input
-
-## Module 4 — Dashboard
-- Admin analytics dashboard
-
-## Module 5 — SQL RAG
-- Natural language to SQL assistant
-
----
-
-# Future Deployment
-- AWS EC2
-- AWS S3
 - PostgreSQL
+
+---
+
+## Folder Structure
+
+frontend/
+
+backend/
+
+routes/
+
+rag/
+
+ml/
+
+claim_engine/
+
+database/
+
+management/
+
+utils/
+
+uploads/
+
+docs/
+
+chroma_db/
+
+---
+
+## Current Status
+
+✅ PDF RAG Completed
+
+✅ ML Premium Prediction Completed
+
+✅ SQL RAG Completed
+
+✅ AI Claim Backend Completed
+
+✅ Customer Frontend Completed
+
+✅ Authentication Completed
+
+⚠ Gemini API quota exhausted during final integration.
+
+⚠ AWS Deployment Pending.
+
+---
+
+## Future Improvements
+
+- Deploy on AWS EC2
+- Store vectors in production vector database
+- AWS RDS
+- AWS S3
+- CI/CD
+- Docker

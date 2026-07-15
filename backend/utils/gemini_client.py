@@ -7,12 +7,20 @@ gemini_client = genai.Client(
     api_key=GEMINI_API_KEY
 )
 
-
 def generate_content(prompt: str):
 
-    response = gemini_client.models.generate_content(
-        model="gemini-2.5-pro",
-        contents=prompt
-    )
+    try:
+        response = gemini_client.models.generate_content(
+            model="gemini-flash-latest",
+            contents=prompt
+        )
 
-    return response.text
+        return response.text
+
+    except Exception as e:
+        print("Gemini Error:", e)
+
+        return (
+            "Sorry! The AI service is currently busy. "
+            "Please try again in a few moments."
+        )

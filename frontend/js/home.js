@@ -50,19 +50,13 @@ document.getElementById("logoutBtn").onclick = () => {
 // ===================================
 
 document.getElementById("quoteCard").onclick = () => {
+    window.location.href = "chatbot.html?form=bike";
+};
 
-    window.location.href = "quote.html";
-
+document.getElementById("healthCard").onclick = () => {
+    window.location.href = "chatbot.html?form=health";
 };
 
 document.getElementById("claimCard").onclick = () => {
-
-    window.location.href = "claim.html";
-
-};
-
-document.getElementById("policyCard").onclick = () => {
-
-    window.location.href = "dashboard.html";
-
+    window.location.href = "chatbot.html?form=claim";
 };
