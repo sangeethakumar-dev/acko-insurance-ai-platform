@@ -69,9 +69,7 @@ async def process_claim(images, customer_details):
 
     claim,
 
-    saved_paths,
-
-    report
+    saved_paths
 
 )
 
