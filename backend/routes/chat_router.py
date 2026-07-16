@@ -50,7 +50,7 @@ def chat(request: ChatRequest):
         prompt = build_prompt(user_query, top_3_chunks)
 
         response = gemini_client.models.generate_content(
-            model="gemini-flash-latest",
+            model="gemini-3.5-flash",
             contents=prompt
         )
 

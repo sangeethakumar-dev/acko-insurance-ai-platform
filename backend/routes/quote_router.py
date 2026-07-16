@@ -5,6 +5,9 @@ from backend.ml.inference.predict_bike import predict_bike_quote
 from backend.ml.inference.predict_car import predict_car_quote
 from backend.ml.inference.predict_health import predict_health_quote
 
+from backend.utils.prompt_builder import build_quote_prompt
+from backend.utils.gemini_client import gemini_client
+
 router = APIRouter()
 
 
@@ -21,44 +24,85 @@ def predict_quote(request: QuoteRequest):
     print(request)
 
     insurance_type = request.insurance_type.strip().lower()
-    print("STEP 2 - Insurance Type :", insurance_type)
-
     details = request.details
+
+    print("STEP 2 - Insurance Type :", insurance_type)
     print("STEP 3 - Details :", details)
+
+    # ---------------------------
+    # ML Prediction
+    # ---------------------------
 
     if insurance_type == "bike":
 
         print("STEP 4 - Calling Bike Model")
         premium = predict_bike_quote(details)
-        print("STEP 5 - Bike Prediction :", premium)
 
     elif insurance_type == "car":
 
         print("STEP 4 - Calling Car Model")
         premium = predict_car_quote(details)
-        print("STEP 5 - Car Prediction :", premium)
 
     elif insurance_type == "health":
 
         print("STEP 4 - Calling Health Model")
-
         premium = predict_health_quote(details)
 
-        print("STEP 5 - Health Prediction :", premium)
-
     else:
-
-        print("STEP X - Invalid Insurance Type")
-        print(repr(insurance_type))
 
         return {
             "error": "Invalid insurance type. Choose bike, car or health."
         }
 
-    print("STEP 6 - Returning Response")
+    print("STEP 5 - Predicted Premium :", premium)
+
+    # ---------------------------
+    # Gemini Explanation
+    # ---------------------------
+
+    try:
+
+        print("STEP 6 - Building Prompt")
+
+        prompt = build_quote_prompt(
+            insurance_type=insurance_type,
+            details=details,
+            predicted_premium=premium
+        )
+
+        print("STEP 7 - Calling Gemini")
+
+        response = gemini_client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents=prompt
+        )
+
+        assistant_response = response.text
+
+        print("STEP 8 - Gemini Response Received")
+
+    except Exception as e:
+
+        print("Gemini Error :", e)
+
+        assistant_response = """
+<h3>Quote Summary</h3>
+
+<p>
+Your insurance premium has been generated successfully.
+Our AI explanation is currently unavailable.
+Please refer to the premium shown above.
+</p>
+"""
+
+    print("STEP 9 - Returning Response")
 
     return {
+
         "insurance_type": insurance_type,
+
         "predicted_premium": round(float(premium), 2),
-        "assistant_response": "Debug Success"
+
+        "assistant_response": assistant_response
+
     }

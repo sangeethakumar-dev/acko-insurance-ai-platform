@@ -193,15 +193,14 @@ async function submitClaim(e){
 
         console.log("Status:", response.status);
 
-        const text = await response.text();
+        console.log("Status:", response.status);
 
-        console.log("Response Body:", text);
+        const data = await response.json();
 
-        return;
+        console.log(data);
 
         console.log(response.status);
 
-        const data = await response.json();
 
         console.log(data);
 
