@@ -1,3 +1,5 @@
+
+
 async function showClaimForm() {
 
     const response = await fetch("forms/claimForm.html");
@@ -9,12 +11,25 @@ async function showClaimForm() {
     chatMessages.scrollTop =
         chatMessages.scrollHeight;
 
-    document
-        .getElementById("claimForm")
-        .addEventListener(
-            "submit",
-            submitClaim
-        );
+        
+    const form = document.getElementById("claimForm");
+
+console.log("FORM FOUND:", form);
+
+form.onsubmit = function(e){
+
+
+    e.preventDefault();
+
+    console.log("SUBMIT EVENT FIRED");
+
+    submitClaim(e);
+
+    return false;
+};
+
+console.log("Submit listener attached");
+
 
     // ================= IMAGE VALIDATION =================
 
@@ -76,13 +91,43 @@ async function showClaimForm() {
 
 async function submitClaim(e){
 
+    try{
+
+    console.log("submitClaim() called");
+
+    console.log("1. submitClaim started");
+
     e.preventDefault();
+
+    console.log("2. preventDefault done");
+
 
     const form = document.getElementById("claimForm");
 
-    showLoading();
+    console.log(form);
+
+    console.log("A");
+
+    console.log("3. form found", form);
+
+if (!form) {
+    alert("FORM NOT FOUND");
+    return;
+}
+
+    //showLoading();
+
+    console.log("4. loading shown");
+
+    console.log("STEP 1");
 
     const formData = new FormData();
+
+    console.log("B");
+
+    console.log("5. formData created");
+
+    console.log("STEP 2");
 
     // ================= IMAGES =================
     console.log(document.querySelectorAll("#claim_images").length);
@@ -91,9 +136,36 @@ async function submitClaim(e){
         form.elements["images"].files;
 
         console.log(imageFiles);
+console.log(imageFiles.length);
+
+        console.log("C");
+
+        console.log("Image count:", imageFiles.length);
+
+        if (imageFiles.length === 0) {
+    alert("No image selected");
+    return;
+}
+
+        console.log("6. imageFiles", imageFiles);
+
+        console.log("STEP 3");
+console.log(imageFiles);
+
+        console.log(imageFiles);
+
+        console.log("D");
         console.log(imageFiles.length);
 
     formData.append("images", imageFiles[0]);
+
+    console.log("Image appended");
+
+    console.log("E");
+
+    console.log("7. image appended");
+
+    console.log("STEP 4");
 
 
     // ================= CUSTOMER DETAILS =================
@@ -103,79 +175,131 @@ async function submitClaim(e){
         form.elements["customer_name"].value
     );
 
+    console.log("F");
+
     // ================= POLICY DETAILS =================
 
-    formData.append(
+    console.log("policy_type element =", form.elements["policy_type"]);
+
+    formData.append(    
         "policy_type",
         form.elements["policy_type"].value
     );
+
+    console.log("G");
+
+    console.log(form.elements["policy_age"]);
 
     formData.append(
         "policy_age",
         form.elements["policy_age"].value
     );
 
+    console.log("H");
+
+    console.log(form.elements["annual_premium"]);
+
     formData.append(
         "annual_premium",
         form.elements["annual_premium"].value
     );
+
+    console.log("I");
+
+    console.log(form.elements["vehicle_age"]);
 
     formData.append(
         "vehicle_age",
         form.elements["vehicle_age"].value
     );
 
+    console.log("J");
+
+    console.log(form.elements["idv"]);
+
     formData.append(
         "idv",
         form.elements["idv"].value
     );
 
+    console.log("K");
+
     // ================= COVERAGE DETAILS =================
+
+    console.log(form.elements["previous_claims"]);
 
     formData.append(
         "previous_claims",
         form.elements["previous_claims"].value
     );
 
+    console.log("L");
+
+    console.log(form.elements["ncb"]);
+
     formData.append(
         "ncb",
         form.elements["ncb"].value
     );
+
+    console.log("M");
+
+    console.log(form.elements["zero_dep"]);
 
     formData.append(
         "zero_dep",
         form.elements["zero_dep"].value
     );
 
+    console.log("N");
+
+    console.log(form.elements["engine_protection"]);
+
     formData.append(
         "engine_protection",
         form.elements["engine_protection"].value
     );
 
+    console.log("O");
+
     // ================= LOCATION =================
+
+    console.log(form.elements["state"]);
 
     formData.append(
         "state",
         form.elements["state"].value
     );
 
+    console.log("P");
+
+    console.log(form.elements["age_group"]);
+
     formData.append(
         "age_group",
         form.elements["age_group"].value
     );
 
+    console.log("Q");
+
+    console.log(form.elements["city_tier"]);
+    
     formData.append(
         "city_tier",
         form.elements["city_tier"].value
     );
 
+    console.log("R");
+
     for (const pair of formData.entries()) {
     console.log(pair[0], pair[1]);
 }
 
-    try{
-
         console.log(formData);
+
+        console.log("STEP 5");
+        
+        console.log("BEFORE FETCH");
 
         const response = await fetch(
 
@@ -191,13 +315,29 @@ async function submitClaim(e){
 
         );
 
+        console.log("AFTER FETCH");
+
+    console.log("STEP 6");
         console.log("Status:", response.status);
 
         console.log("Status:", response.status);
+
+        if (!response.ok) {
+    throw new Error("Backend Error");
+}
 
         const data = await response.json();
 
+        console.log("FULL RESPONSE");
         console.log(data);
+
+        alert(JSON.stringify(data));
+
+        console.log("========== CLAIM RESPONSE ==========");
+        console.log(data);
+        console.log("REPORT:");
+        console.log(data.report);
+        console.log("====================================");
 
         console.log(response.status);
 
@@ -334,7 +474,7 @@ async function submitClaim(e){
 
         <br><br>
 
-        ${data.analysis.summary}
+        ${data.report || "No AI report available."}
 
         <br><br>
 
@@ -361,6 +501,10 @@ async function submitClaim(e){
     }
 
     catch(err){
+
+        console.error("submitClaim ERROR:", err);
+
+        alert(err.message);
 
         removeLoading();
 

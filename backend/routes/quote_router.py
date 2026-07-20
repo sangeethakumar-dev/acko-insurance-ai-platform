@@ -7,6 +7,9 @@ from backend.ml.inference.predict_health import predict_health_quote
 
 from backend.utils.prompt_builder import build_quote_prompt
 from backend.utils.gemini_client import gemini_client
+from backend.utils.config import GEMINI_MODEL
+
+import traceback
 
 router = APIRouter()
 
@@ -73,17 +76,17 @@ def predict_quote(request: QuoteRequest):
         print("STEP 7 - Calling Gemini")
 
         response = gemini_client.models.generate_content(
-            model="gemini-2.5-flash",
+            model=GEMINI_MODEL,
             contents=prompt
         )
 
-        assistant_response = response.text
+        assistant_response = response.text if response.text else \
+    "AI explanation unavailable."
 
         print("STEP 8 - Gemini Response Received")
 
-    except Exception as e:
-
-        print("Gemini Error :", e)
+    except Exception:
+        traceback.print_exc()
 
         assistant_response = """
 <h3>Quote Summary</h3>

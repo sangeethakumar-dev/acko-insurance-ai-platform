@@ -8,6 +8,8 @@ load_dotenv()
 
 GEMINI_API_KEY  = os.getenv("GEMINI_API_KEY")
 
+GEMINI_MODEL = "gemini-2.5-flash"
+
 DB_HOST = os.getenv("DB_HOST")
 DB_PORT = os.getenv("DB_PORT")
 DB_NAME = os.getenv("DB_NAME")

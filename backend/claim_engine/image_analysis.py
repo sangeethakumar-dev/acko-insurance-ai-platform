@@ -5,6 +5,7 @@ from importlib_resources import contents
 
 from backend.utils.gemini_client import gemini_client
 from backend.utils.prompt_builder import build_claim_analysis_prompt
+from backend.utils.config import GEMINI_MODEL
 
 from google.genai import types
 
@@ -53,7 +54,7 @@ def analyze_images(image_paths: list[str]) -> dict:
 
     # Gemini Vision
     response = gemini_client.models.generate_content(
-        model="gemini-3.5-flash",
+        model=GEMINI_MODEL,
         contents=contents,
     )
 

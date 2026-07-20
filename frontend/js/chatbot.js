@@ -1,3 +1,5 @@
+
+
 console.log("chatbot.js loaded successfully");
 
 // ===========================================
@@ -21,6 +23,52 @@ const claimCard = document.getElementById("claimCard");
 const quoteCard = document.getElementById("quoteCard");
 
 const healthCard = document.getElementById("healthCard");
+
+const input = document.getElementById("userInput");
+
+userInput.addEventListener("keydown", function(event) {
+
+    if (event.key === "Enter") {
+
+        event.preventDefault();
+
+        sendMessage();
+
+    }
+
+});
+// ===========================================
+// HOME
+// ===========================================
+
+homeBtn.onclick = () => {
+
+    window.location.href = "home.html";
+
+};
+
+// ===========================================
+// CLEAR CHAT
+// ===========================================
+
+clearChatBtn.onclick = () => {
+
+    chatMessages.innerHTML = "";
+
+};
+    
+// ===========================================
+// QUICK ACTIONS
+// ===========================================
+
+policyCard.onclick = showPolicyChat;
+
+claimCard.onclick = showClaimForm;
+
+quoteCard.onclick = showQuoteSelection;
+
+healthCard.onclick = showHealthQuoteForm;
+
 
 // ===========================================
 // HOME
@@ -411,6 +459,10 @@ async function submitBikeQuote(e){
         );
 
         console.log(response.status);
+
+        if (!response.ok) {
+    throw new Error(`Server Error: ${response.status}`);
+}
 
         const data = await response.json();
 
@@ -1736,61 +1788,19 @@ window.addEventListener("DOMContentLoaded", async () => {
 
     const params = new URLSearchParams(window.location.search);
 
+    const form = params.get("form");
     const workflow = params.get("workflow");
     const type = params.get("type");
 
     if (workflow === "quote" && type === "bike") {
 
         addBotMessage("🚲 Sure! I'll help you get a Bike Insurance quotation.");
-
         await showBikeQuoteForm();
-    }
-
-});
-
-window.addEventListener("DOMContentLoaded", () => {
-
-    const params = new URLSearchParams(window.location.search);
-
-    const workflow = params.get("workflow");
-    const type = params.get("type");
-
-
-});
-
-window.addEventListener("DOMContentLoaded", async () => {
-
-    const params = new URLSearchParams(window.location.search);
-
-console.log("Form =", params.get("form"));
-
-if (params.get("form") === "health") {
-    await showHealthQuoteForm();
-}
-
-});
-
-// ===========================================
-// AUTO OPEN HEALTH QUOTATION FORM
-// ===========================================
-
-window.addEventListener("DOMContentLoaded", async () => {
-
-    const params = new URLSearchParams(window.location.search);
-
-    if (params.get("form") === "health") {
-
-        await showHealthQuoteForm();
+        return;
 
     }
 
-});
-
-window.addEventListener("DOMContentLoaded", async () => {
-
-    const params = new URLSearchParams(window.location.search);
-
-    switch (params.get("form")) {
+    switch (form) {
 
         case "bike":
             await showBikeQuoteForm();
@@ -1807,22 +1817,6 @@ window.addEventListener("DOMContentLoaded", async () => {
         case "claim":
             await showClaimForm();
             break;
-    }
-
-});
-
-window.addEventListener("DOMContentLoaded", async () => {
-
-    const params = new URLSearchParams(window.location.search);
-
-    console.log("Form =", params.get("form"));
-
-    if (params.get("form") === "health") {
-
-        console.log("Opening Health Form");
-
-        await showHealthQuoteForm();
-
     }
 
 });

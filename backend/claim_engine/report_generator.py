@@ -1,4 +1,5 @@
 from backend.utils.gemini_client import gemini_client
+from backend.utils.config import GEMINI_MODEL
 from backend.utils.prompt_builder import build_claim_report_prompt
 
 def format_claim_data(claim_data: dict) -> str:
@@ -176,11 +177,15 @@ def generate_claim_report(
     prompt = build_claim_report_prompt(formatted_claim_data)
 
     response = gemini_client.models.generate_content(
+    model=GEMINI_MODEL,
+    contents=prompt
+)
 
-        model="gemini-3.5-flash",
+    print("========== GEMINI REPORT ==========")
+    print(response)
+    print("===================================")
 
-        contents=prompt
+    if hasattr(response, "text") and response.text:
+        return response.text
 
-    )
-
-    return response.text
+    return "AI report could not be generated."

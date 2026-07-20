@@ -1,11 +1,12 @@
 from google import genai
 from backend.utils.config import GEMINI_API_KEY
+from backend.utils.config import GEMINI_MODEL
 
 client = genai.Client(api_key=GEMINI_API_KEY)
 
 try:
     response = client.models.generate_content(
-        model="gemini-3.5-flash",   # You can also try gemini-2.5-flash
+        model="GEMINI_MODEL",   
         contents="Hello"
     )
 

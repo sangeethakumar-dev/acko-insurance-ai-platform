@@ -1,7 +1,7 @@
 from google import genai
 
 from backend.utils.config import GEMINI_API_KEY
-
+from backend.utils.config import GEMINI_MODEL
 
 gemini_client = genai.Client(
     api_key=GEMINI_API_KEY
@@ -11,7 +11,7 @@ def generate_content(prompt: str):
 
     try:
         response = gemini_client.models.generate_content(
-            model="gemini-3.5-flash",
+            model=GEMINI_MODEL,
             contents=prompt
         )
 

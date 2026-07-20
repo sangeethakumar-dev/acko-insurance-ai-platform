@@ -277,14 +277,23 @@ CHAT HEADER
 
     align-items:center;
 
-    gap:20px;
+    gap:18px;
 
     background:linear-gradient(90deg,#5d35f5,#7b49ff);
 
     color:white;
 
-    padding:22px 35px;
+    padding:15px 25px;
 
+    min-height:80px;
+
+    border-radius:18px;
+
+}
+
+.chat-header h1{
+    font-size:26px;
+    margin:0;
 }
 
 .bot-avatar{
@@ -311,18 +320,23 @@ CHAT HEADER
 
 .chat-header h2{
 
-    font-size:30px;
+    font-size:22px;
 
-    margin-bottom:5px;
+    margin-bottom:20px;
 
 }
 
 .chat-header p{
-
-    opacity:.95;
-
+    font-size:16px;
+    margin-top:4px;
+    margin-bottom:0;
 }
 
+.chat-header img,
+.chat-header .avatar{
+    width:60px;
+    height:60px;
+}
 
 /* ==========================================
 CHAT MESSAGES
@@ -513,7 +527,7 @@ RESPONSIVE
 
 .chat-header h2{
 
-    font-size:24px;
+    font-size:18px;
 
 }
 
@@ -1199,4 +1213,23 @@ input[type=file]{
     margin-top:10px;
     margin-bottom:15px;
 
+}
+
+.premium-summary{
+    margin-top:20px;
+    padding:20px;
+}
+
+.premium-summary h3{
+    margin-top:0;
+    margin-bottom:15px;
+}
+
+.premium-summary ul{
+    margin:10px 0;
+    padding-left:22px;
+}
+
+.premium-summary p{
+    margin:10px 0;
 }

@@ -1,21 +1,29 @@
 from typing import Dict, Any, List
+from typing import List
+
+from typing import List
 
 def build_prompt(user_query, top_3_chunks):
+
     context = ""
 
     for score, chunk, metadata in top_3_chunks:
         context += f"""
-        Source: {metadata['pdf_name']}
-        Section: {metadata.get('section_title', metadata.get('section', 'N/A'))}
+Source: {metadata['pdf_name']}
+Section: {metadata.get('section_title', metadata.get('section', 'N/A'))}
 
-        {chunk}
+{chunk}
 
-        """
-    
+"""
+
     prompt = f"""
 You are ACKO AI, a friendly, professional, and helpful insurance assistant.
 
-Your job is to answer ONLY using the provided insurance knowledge.
+Your job is to answer ONLY using the INSURANCE KNOWLEDGE provided below.
+
+Do NOT use outside knowledge.
+Do NOT hallucinate.
+Do NOT invent information.
 
 ========================
 INSURANCE KNOWLEDGE
@@ -30,44 +38,86 @@ USER QUESTION
 {user_query}
 
 ========================
-RESPONSE INSTRUCTIONS
+RESPONSE FORMAT
 ========================
 
-Write responses like a real customer support executive.
+Return ONLY valid HTML.
 
-Follow these rules strictly:
+Do NOT use Markdown.
 
-1. Start with a warm greeting only if appropriate.
-2. Never display Markdown symbols like:
-   ###
-   ##
-   **
-   ---
-3. Do NOT use markdown headings.
+Do NOT use:
+
+- ##
+- ###
+- **
+- ---
+- ```html
+
+Use this HTML structure:
+
+<div class="chat-response">
+
+<h2>📌 Topic</h2>
+
+<p>
+Brief explanation in simple English.
+</p>
+
+<h3>🔹 Key Points</h3>
+
+<ul>
+<li>Point 1</li>
+<li>Point 2</li>
+<li>Point 3</li>
+</ul>
+
+<h3>💰 Formula / Numbers</h3>
+
+<p>
+Formula if applicable.
+</p>
+
+<h3>⚠️ Important Notes</h3>
+
+<ul>
+<li>Important point</li>
+<li>Important point</li>
+</ul>
+
+<h3>✅ Summary</h3>
+
+<p>
+One-line summary.
+</p>
+
+<p>
+😊 End with ONE friendly follow-up question.
+</p>
+
+</div>
+
+Rules:
+
+1. Return ONLY HTML.
+2. Do NOT wrap the HTML inside ```html```.
+3. Keep the answer under 250 words.
 4. Use simple English.
-5. Keep paragraphs short (2-3 lines maximum).
-6. Use bullet points (•) instead of long paragraphs.
-7. Use relevant emojis naturally (🚗 💡 📋 ✅ 💰 ⚠️ 😊).
-8. Highlight important words using UPPERCASE instead of markdown bold.
-9. Explain concepts in a beginner-friendly way.
-10. If numbers or formulas exist, present them clearly.
-11. End with a friendly follow-up question.
+5. Use short paragraphs.
+6. Use bullet points wherever possible.
+7. Omit the Formula section if there is no formula.
+8. Omit the Important Notes section if there are no important notes.
+9. Never repeat information.
+10. Never invent information.
 
-If the answer is not available in the provided context, politely reply:
+If the answer is not available in the provided context, return ONLY this HTML:
 
-"I'm sorry 😔. I couldn't find that information in the insurance documents. Please contact an ACKO support representative for further assistance."
+<div class="chat-response">
+<p>I'm sorry 😔. I couldn't find that information in the insurance documents. Please contact an ACKO support representative for further assistance.</p>
+</div>
 
-Never invent information.
+"""
 
-Make the response visually clean and easy to read.
-
-        Context:
-            {context}
-        User Question:
-            {user_query}
-            """
     return prompt
-
 
 def build_quote_prompt(
     insurance_type,
@@ -75,12 +125,16 @@ def build_quote_prompt(
     predicted_premium: float
 ):
 
-    return f"""
+    # ===========================
+    # BIKE
+    # ===========================
+
+    if insurance_type == "bike":
+
+        return f"""
 You are an ACKO Insurance AI Advisor.
 
-The machine learning model has already predicted the annual premium.
-
-DO NOT change the premium amount.
+The ML model has already predicted the annual premium.
 
 Predicted Annual Premium:
 ₹{predicted_premium:,.2f}
@@ -111,39 +165,144 @@ State : {details['state']}
 
 Write ONLY HTML.
 
-Do NOT use Markdown.
-
-Do NOT use ** or #.
-
-Do NOT use triple backticks.
-
-Keep the response below 170 words.
-
-Use this structure exactly:
+Use:
 
 <h3>Understanding Your Quote</h3>
 
 <ul>
+<li><b>Premium Factors</b></li>
+<li><b>NCB Impact</b></li>
+<li><b>Claim History</b></li>
+<li><b>IDV</b></li>
+<li><b>Coverage</b></li>
+<li><b>Ways to Reduce Premium</b></li>
+</ul>
 
-<li><b>Premium Factors:</b> Explain why the premium has this value.</li>
+End with one recommendation.
 
-<li><b>NCB Impact:</b> Explain how NCB affects premium.</li>
+Never change the premium.
+"""
 
-<li><b>Claim History:</b> Explain previous claims effect.</li>
+    # ===========================
+    # CAR
+    # ===========================
 
-<li><b>IDV:</b> Explain how IDV affects premium.</li>
+    elif insurance_type == "car":
 
-<li><b>Policy Coverage:</b> Mention the selected policy type.</li>
+        return f"""
+You are an ACKO Car Insurance Advisor.
 
-<li><b>Ways to Reduce Premium:</b> Give 3 short tips.</li>
+Predicted Annual Premium:
+₹{predicted_premium:,.2f}
+
+Vehicle Details
+
+Make : {details['vehicle_make']}
+Model : {details['vehicle_model']}
+Variant : {details['variant']}
+Fuel : {details['fuel_type']}
+Manufacturing Year : {details['manufacturing_year']}
+Vehicle Age : {details['vehicle_age_years']}
+IDV : ₹{details['idv']}
+
+Policy Details
+
+Policy Type : {details['policy_type']}
+NCB : {details['ncb_percent']}%
+Previous Claims : {details['claim_history_count']}
+
+Customer Details
+
+Age : {details['customer_age']}
+State : {details['state']}
+
+Return ONLY HTML.
+
+Explain:
+
+- Premium factors
+- IDV
+- NCB
+- Previous claims
+- Coverage
+- Premium saving tips
+
+Never change the premium.
+"""
+
+    # ===========================
+    # HEALTH
+    # ===========================
+
+    elif insurance_type == "health":
+
+        return f"""
+You are an ACKO Health Insurance Advisor.
+
+The ML model has already predicted the premium.
+
+Predicted Annual Premium:
+₹{predicted_premium:,.2f}
+
+Customer Details
+
+Plan Name : {details['plan_name']}
+Plan Category : {details['plan_category']}
+Age : {details['age']}
+Gender : {details['gender']}
+Family Members : {details['num_members']}
+State : {details['state']}
+BMI : {details['bmi_category']}
+Smoking : {"Yes" if details['smoke'] else "No"}
+Pre-existing Disease : {"Yes" if details['has_pre_existing'] else "No"}
+
+Coverage Details
+
+Sum Insured : ₹{details['sum_insured']}
+Deductible : ₹{details['deductible']}
+Annual Checkup : {"Yes" if details['annual_checkup'] else "No"}
+No Claim Bonus Years : {details['ncb_years']}
+Number of Add-ons : {details['num_addons']}
+Add-ons : {details['addons_list']}
+Maternity Cover : {"Yes" if details['has_maternity'] else "No"}
+OPD Cover : {"Yes" if details['has_opd'] else "No"}
+Policy Tenure : {details['policy_tenure']} Year(s)
+Previous Insurer : {details['prev_insurer']}
+
+Return ONLY HTML.
+
+Use:
+
+<h3>Understanding Your Health Insurance Quote</h3>
+
+<ul>
+
+<li><b>Premium Factors</b></li>
+
+<li><b>Coverage Summary</b></li>
+
+<li><b>Effect of Age & Health</b></li>
+
+<li><b>Benefits of Add-ons</b></li>
+
+<li><b>Ways to Reduce Premium</b></li>
 
 </ul>
 
-End with one short recommendation.
+End with one recommendation.
 
 Never change the predicted premium.
 """
 
+    else:
+
+        return f"""
+Predicted Premium: ₹{predicted_premium:,.2f}
+
+Explain the insurance premium in simple HTML.
+
+Never change the premium.
+"""
 
 
 def build_claim_analysis_prompt() -> str:

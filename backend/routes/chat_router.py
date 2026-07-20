@@ -5,6 +5,7 @@ from backend.utils.gemini_client import gemini_client
 from backend.rag.retrieval import retrieve_pipeline
 from backend.utils.prompt_builder import build_prompt
 from backend.utils.intent_classifier import classify_intent
+from backend.utils.config import GEMINI_MODEL
 
 router = APIRouter()
 
@@ -20,6 +21,21 @@ def chat(request: ChatRequest):
 
     # Step 1 : Detect Intent
     intent = classify_intent(user_query)
+
+    # ==================General Greeting========================
+
+    if intent == "greeting":
+
+        response = gemini_client.models.generate_content(
+        model="YOUR_WORKING_MODEL",
+        contents=user_query
+    )
+
+        return {
+        "user_query": user_query,
+        "intent": "greeting",
+        "response": response.text
+    }
 
     # ================= QUOTATION =================
 
@@ -50,7 +66,7 @@ def chat(request: ChatRequest):
         prompt = build_prompt(user_query, top_3_chunks)
 
         response = gemini_client.models.generate_content(
-            model="gemini-3.5-flash",
+            model=GEMINI_MODEL,
             contents=prompt
         )
 
